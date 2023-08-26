@@ -1,0 +1,13 @@
+/* seu-estilo.css */
+.outline-text-black {
+  font-size: 6rem;
+  -webkit-text-stroke: 1px black;
+  color: transparent;
+}
+
+/* seu-estilo.css */
+.outline-text-white {
+  font-size: 6rem;
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+}
