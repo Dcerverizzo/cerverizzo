@@ -21,7 +21,6 @@ export default function Home() {
         <About />
         <Skills />
         <Experience />
-        {/* <Blog /> */}
         <Contact />
       </div>
     </ThemeProvider>
