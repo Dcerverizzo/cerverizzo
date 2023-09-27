@@ -1,29 +1,23 @@
-"use-client";
-
-import Nav from './components/nav';
-import HomePage from './components/home';
-import Services from './components/services';
-import About from './components/about';
-import Experience from './components/experience';
-import Skills from './components/skills';
-import Blog from './components/blog';
-import Contact from './components/contact';
-import { ThemeProvider } from '../context/ThemeContext';
+import Nav from './components/Nav';
+import About from './components/About';
+import RecentPosts from './components/RecentPosts';
+import Follow from './components/Follow';
 
 export default function Home() {
 
   return (
-    <ThemeProvider>
-      <div>
-        <Nav />
-        <HomePage />
-        <Services />
+    <div className='flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0'>
+
+      <Nav />
+      <section>
+        {/* Daniel Information */}
         <About />
-        <Skills />
-        <Experience />
-        <Contact />
-      </div>
-    </ThemeProvider>
+        {/* Blog posts */}
+        <RecentPosts />
+        {/* Follow me */}
+        <Follow/>
+      </section>
+    </div>
   );
 }
 

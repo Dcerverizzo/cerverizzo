@@ -20,10 +20,8 @@ export default function RootLayout({
   isDarkMode: boolean;
 }) {
   return (
-    <ThemeProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
+    <html lang="en" className='text-black bg-white dark:text-white dark:bg-[#111010] __variable_6820b1'>
+      <body className={`antialiased max-w-2xl mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto ${inter.className}`}>{children}</body>
       </html>
-    </ThemeProvider>
   );
 }
