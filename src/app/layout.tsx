@@ -1,5 +1,4 @@
 import React from 'react';
-import { ThemeProvider } from '../context/ThemeContext';
 
 import './globals.css';
 import type { Metadata } from 'next';
@@ -14,10 +13,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  isDarkMode,
 }: {
   children: React.ReactNode;
-  isDarkMode: boolean;
 }) {
   return (
     <html lang="en" className='text-black bg-white dark:text-white dark:bg-[#111010] __variable_6820b1'>
