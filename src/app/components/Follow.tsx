@@ -30,7 +30,7 @@ export default function Follow() {
             className="flex items-center hover:text-neutral-800 dark:hover:text-neutral-100 transition-all"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://leerob.substack.com"
+            href="https://cerverizzo.substack.com/"
           >
             <svg
               width="12"
