@@ -39,6 +39,10 @@ export interface Parent {
 }
 
 export interface Properties {
+  Authors: any;
+  Published: any;
+  Slug: any;
+  Page: any;
   tags: Tags;
   slug: Slug;
   title: Title;

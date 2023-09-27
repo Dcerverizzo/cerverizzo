@@ -25,7 +25,7 @@ export async function getPosts() {
         slug: post.properties.Slug.rich_text[0].plain_text,
         createdAt: post.created_time,
         published: post.properties.Published.checkbox,
-        authors: post.properties.Authors.people.map((author) => author.id),
+        authors: post.properties.Authors.people.map((author: { id: any; }) => author.id),
         url: post.url,
       };
     });
