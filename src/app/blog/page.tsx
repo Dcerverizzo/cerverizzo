@@ -21,7 +21,7 @@ export default async function BlogHome() {
                   {post.title}
                 </p>
                 <p className="text-neutral-600 dark:text-neutral-400">
-                  {post.createdAt.toLocaleString()}
+                  {new Date(post.createdAt).toLocaleString('pt-BR')}
                 </p>
               </div>
               <div className="text-neutral-700 dark:text-neutral-300">

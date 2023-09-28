@@ -1,3 +1,4 @@
+import ImageGallery from "./ImageGallery";
 
 export default function About() {
   return (
@@ -268,116 +269,21 @@ c-18 -3 -37 0 -49 10 -19 13 -20 29 -25 228 -5 196 -7 216 -27 255 -13 23 -38
           </svg>
           Ruby
         </a>
-
       </p>
 
-      <div className="columns-2 sm:columns-3 gap-4 my-8">
-
-        <div className="relative h-40 mb-4">
-          <img
-            alt="Me speaking on stage"
-            src='/images/speaking_1.jpeg'
-            className="rounded-lg object-cover"
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: '100%',
-              inset: '0px',
-              color: 'transparent',
-            }}
-          />
-        </div>
-
-        <div className="relative h-80 mb-4 sm:mb-0">
-          <img
-            alt="Me and the SistemasBR team"
-            src='/images/sistemasbr_speaking.jpg'
-            className="rounded-lg object-cover object-[-16px] sm:object-center"
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: '100%',
-              inset: '0px',
-              color: 'transparent',
-            }}
-          />
-        </div>
-
-        <div className="relative h-40 sm:h-80 sm:mb-4">
-          <img
-            alt="Me speaking about Front End World"
-            src='/images/myself.JPG'
-            className="rounded-lg object-cover object-top sm:object-center"
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: '100%',
-              inset: '0px',
-              color: 'transparent',
-            }}
-          />
-        </div>
-
-        <div className="relative h-40 mb-4">
-          <img
-            alt="Me and the Didactica tech team"
-            src='/images/didactica_team.jpg'
-            className="rounded-lg object-cover"
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: '100%',
-              inset: '0px',
-              color: 'transparent',
-            }}
-          />
-        </div>
-
-        <div className="relative h-40 mb-4">
-          <img
-            alt="Me and Cobre Facil team celebrating"
-            src='/images/meet.jpg'
-            className="rounded-lg object-cover"
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: '100%',
-              inset: '0px',
-              color: 'transparent',
-            }}
-          />
-        </div>
-
-        {/* <div className="absolute h-80">
-            <img
-              alt="Me standing on stage at Reactathon delivering the keynote"
-              // src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Freactathon.30f4081b.jpg&w=3840&q=75"
-              src='/images/graduation.jpeg'
-              className="rounded-lg object-cover object-top sm:object-center"
-              style={{
-                position: 'absolute',
-                height: '100%',
-                width: '100%',
-                inset: '0px',
-                color: 'transparent',
-              }}
-            />
-          </div> */}
-
-      </div>
+      <ImageGallery />
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          I designed user-facing features for web apps and collaborated with designers.
-          In previous roles, I worked in support, enhancing communication, and as a Junior, I strengthened problem-solving skills.
-          Always focus on solution.
+          I have experience designing user-facing features for web applications and collaborating with designers.
+          In my previous roles, I also worked in support, improving communication, and as a Junior, I honed my problem-solving skills. 
+          I always prioritize finding solutions.
         </p>
         <p className='mt-5'>
-          I've also given talks at tech community events, promoting tech development and talk about Front End world.
-          I use my public speaking skills to communicate effectively with clients, superiors, and tech enthusiasts.
+          I've had the privilege of delivering talks at tech community events, where I advocate for tech development and share insights about the Front End world. 
+          These experiences have allowed me to leverage my public speaking skills, enabling effective communication with clients, superiors, and fellow tech enthusiasts.
         </p>
       </div>
-
     </div>
   )
 }

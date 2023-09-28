@@ -22,7 +22,7 @@ export default function Follow() {
                 fill="currentColor"
               ></path>
             </svg>
-            <p className="h-7 ml-2">follow me</p>
+            <p className="h-7 ml-2">Contact me</p>
           </a>
         </li>
         <li>
