@@ -1,10 +1,11 @@
-import Nav from './components/Nav';
-import About from './components/About';
-import RecentPosts from './components/RecentPosts';
-import Follow from './components/Follow';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import Nav from './components/Nav'
+import About from './components/About'
+import RecentPosts from './components/RecentPosts'
+import Follow from './components/Follow'
+import React from 'react'
 
-export default function Home() {
-
+export default function Home () {
   return (
     <div className='flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0'>
       {/* Nav */}
@@ -19,6 +20,5 @@ export default function Home() {
         <Follow />
       </section>
     </div>
-  );
+  )
 }
-
