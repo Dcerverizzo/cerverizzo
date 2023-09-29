@@ -5,6 +5,7 @@ module.exports = {
         "node": true
     },
     "extends": [
+        "next",
         "standard-with-typescript",
         "plugin:react/recommended"
     ],
@@ -29,9 +30,8 @@ module.exports = {
         "react"
     ],
     "rules": {
-        // Desabilite todas as regras aqui
-        "indent": "off",
-        "semi": "off",
-        // Adicione outras regras aqui, se necessário
+        // Desabilite as regras que você deseja aqui
+        "react/no-unescaped-entities": "off",
+        "@next/next/no-page-custom-font": "off"
     }
 }
