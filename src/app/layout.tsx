@@ -18,7 +18,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='text-black bg-white dark:text-white dark:bg-[#111010] __variable_6820b1'>
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZSTD0P2R9"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-WZSTD0P2R9');`
+        }}>
+        </script>
+      </head>
       <body className={`antialiased max-w-2xl mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto ${inter.className}`}>{children}</body>
-      </html>
+    </html>
   );
 }
