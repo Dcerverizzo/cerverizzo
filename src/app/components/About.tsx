@@ -273,7 +273,6 @@ c-18 -3 -37 0 -49 10 -19 13 -20 29 -25 228 -5 196 -7 216 -27 255 -13 23 -38
           Ruby
         </a>
       </p>
-
       <ImageGallery />
 
       <div className="prose prose-neutral dark:prose-invert">
