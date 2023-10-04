@@ -15,7 +15,6 @@ export default async function BlogPost ({
       <Nav />
       <div className="m-auto max-w-2xl p-6 min-h-screen">
         <h1 className="text-4xl py-6">{post.title}</h1>
-
         <ReactMarkdown
           components={{
             h2: ({ node, ...props }) => (
