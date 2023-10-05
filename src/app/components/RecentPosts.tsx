@@ -1,15 +1,18 @@
 import { getPosts } from "../_services/notion";
 
-const RecentPosts = async () => {
+const RecentPosts = async ({ limit }: { limit?: number }) => {
   const recentPosts = await getPosts();
+  const postsToDisplay = limit && !isNaN(limit) ? recentPosts.slice(0, limit) : recentPosts;
 
   return (
     <div className="my-8 flex flex-col space-y-4 w-full">
-      {recentPosts.slice(0, 3).map((post) => (
+
+      {postsToDisplay.map((post) => (
         <a
           key={post.id}
           href={`/blog/${post.slug}`}
-          className="border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 rounded flex items-center justify-between px-3 py-4 w-full"
+          className="border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 rounded flex items-center justify-between px-3 py-4 w-full
+          hover:-translate-y-1 hover:scale-110 duration-300"
         >
           <div className="flex flex-col">
             <p className="font-bold text-neutral-900 dark:text-neutral-100">

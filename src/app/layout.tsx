@@ -19,6 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" className='text-black bg-white dark:text-white dark:bg-[#111010] __variable_6820b1'>
       <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+        <link rel="manifest" href="images/site.webmanifest"></link>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZSTD0P2R9"></script>
         <script dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];

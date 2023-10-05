@@ -15,7 +15,7 @@ export default function Home () {
         {/* Daniel Information */}
         <About />
         {/* Blog posts */}
-        <RecentPosts />
+        <RecentPosts limit={3} />
         {/* Follow me */}
         <Follow />
       </section>
