@@ -33,9 +33,11 @@ export default function RootLayout({
         }}>
         </script>
       </head>
-      <body className={`antialiased max-w-2xl mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto ${inter.className} dark:bg-black`}>
-        {children}
-      </body>
+      <Provider>
+        <body className={`antialiased max-w-2xl mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto ${inter.className} dark:bg-black`}>
+          {children}
+        </body>
+      </Provider>
     </html>
   );
 }
