@@ -3,6 +3,7 @@ import React from 'react';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Provider from './components/Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className='text-black bg-white dark:text-white dark:bg-[#111010] __variable_6820b1'>
+    <html lang="en">
       <head>
         <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
@@ -32,7 +33,9 @@ export default function RootLayout({
         }}>
         </script>
       </head>
-      <body className={`antialiased max-w-2xl mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto ${inter.className}`}>{children}</body>
+      <body className={`antialiased max-w-2xl mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto ${inter.className} dark:bg-black`}>
+        {children}
+      </body>
     </html>
   );
 }

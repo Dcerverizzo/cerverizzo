@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Nav() {
   const pathname = usePathname()
@@ -33,9 +34,12 @@ export default function Nav() {
                     {isActive('/blog') && (
                       <div className="absolute h-[1px] top-7 mx-2 inset-0 bg-neutral-200 dark:bg-neutral-800 z-[-1] dark:bg-gradient-to-r from-transparent to-neutral-900"></div>
                     )}
-                    </span>
+                  </span>
                 </div>
               </Link>
+            </div>
+            <div className="ml-auto">
+              <ThemeSwitcher />
             </div>
           </nav>
         </div>
