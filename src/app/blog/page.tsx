@@ -1,7 +1,10 @@
-import { getPosts } from '../_services/notion'
-import Nav from '../components/Nav'
-import React from 'react'
-import RecentPosts from '../components/RecentPosts'
+// import { getPosts } from '../_services/notion'
+// import Nav from '../components/Nav'
+// import React from 'react'
+// import RecentPosts from '../components/RecentPosts'
+
+import Nav from "../components/Nav";
+import RecentPosts from "../components/RecentPosts";
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default async function BlogHome() {

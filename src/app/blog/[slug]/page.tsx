@@ -1,24 +1,35 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { getPost } from '@/app/_services/notion'
-import Nav from '@/app/components/Nav'
-import ReactMarkdown from 'react-markdown'
+import 'highlight.js/styles/github-dark.css';
 
-export default async function BlogPost({
-  params
+import { fetchPost } from "@/lib/devto/fetch";
+import ReactMarkdown from 'react-markdown'
+import Nav from '@/app/components/Nav'
+
+export async function generateMetadata({
+  params,
 }: {
-  params: { slug: string }
-}): Promise<JSX.Element> {
-  const post = await getPost(params.slug)
+  params: { slug: string };
+}) {
+  const { title, description } = await fetchPost(params.slug);
+
+  return {
+    title,
+    description,
+  };
+}
+
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { body_markdown } = await fetchPost(params.slug);
 
   return (
-    <div className="w-full min-h-screen">
-      <Nav />
-      <div className="m-auto max-w-2xl p-6 min-h-screen">
-        <h1 className="text-4xl py-6">{post.title}</h1>
-        <article>
-          <ReactMarkdown>{post.content}</ReactMarkdown>
-        </article>
-      </div>
-    </div>
-  )
+    <>
+      <div className="w-full min-h-screen">
+        <Nav />
+        <article className='prose dark:prose-invert'>
+          <div>
+            <ReactMarkdown>{body_markdown}</ReactMarkdown>
+          </div>
+        </article >
+      </div >
+    </>
+  );
 }

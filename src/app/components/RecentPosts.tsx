@@ -1,7 +1,7 @@
-import { getPosts } from "../_services/notion";
+import { fetchPosts } from "../../lib/devto/fetch";
 
 const RecentPosts = async ({ limit }: { limit?: number }) => {
-  const recentPosts = await getPosts();
+  const recentPosts = await fetchPosts();
   const postsToDisplay = limit && !isNaN(limit) ? recentPosts.slice(0, limit) : recentPosts;
 
   return (
@@ -19,7 +19,7 @@ const RecentPosts = async ({ limit }: { limit?: number }) => {
               {post.title}
             </p>
             <p className="text-neutral-600 dark:text-neutral-400">
-              {new Date(post.createdAt).toLocaleString('pt-BR')}
+              {new Date(post.created_at).toLocaleDateString('pt-BR')}
             </p>
           </div>
           <div className="text-neutral-700 dark:text-neutral-300">
