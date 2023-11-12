@@ -27,6 +27,16 @@ export default function Nav() {
                   </span>
                 </div>
               </Link>
+              <Link href="/portfolio">
+                <div className={`transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle ${isActive('/portfolio') ? 'text-neutral-800 dark:text-neutral-200' : 'text-neutral-500'}`}>
+                  <span className="relative py-1 px-2">
+                    portfolio
+                    {isActive('/portfolio') && (
+                      <div className="absolute h-[1px] top-7 mx-2 inset-0 bg-neutral-200 dark:bg-neutral-800 z-[-1] dark:bg-gradient-to-r from-transparent to-neutral-900"></div>
+                    )}
+                  </span>
+                </div>
+              </Link>
               <Link href="/blog">
                 <div className={`transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle ${isActive('/blog') ? 'text-neutral-800 dark:text-neutral-200' : 'text-neutral-500'}`}>
                   <span className="relative py-1 px-2">

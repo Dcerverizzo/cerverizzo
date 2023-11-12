@@ -37,7 +37,7 @@ module.exports = {
       },
       {
         userAgent: 'test-bot',
-        allow: ['/blog'],
+        allow: ['/blog', '/portfolio'],
       },
     ],
   },
