@@ -5,20 +5,26 @@ import RecentPosts from './components/RecentPosts'
 import Follow from './components/Follow'
 import React from 'react'
 import Provider from './components/Provider'
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Software Enginner',
+    default: 'Daniel Cerverizzo',
+  },
+  description: 'Software Enginner Full Stack ',
+  metadataBase: new URL('https://cerverizzo.dev/'),
+};
 
 export default function Home() {
   return (
     <div className='flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 dark:bg-black'>
       <Provider>
-        {/* Nav */}
         <Nav />
-        {/* Section container */}
         <section>
-          {/* Daniel Information */}
           <About />
-          {/* Blog posts */}
           <RecentPosts limit={3} />
-          {/* Follow me */}
           <Follow />
         </section>
       </Provider>

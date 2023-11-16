@@ -7,5 +7,5 @@ export type Repo = {
 export type RepoDetails = Repo & {
   body_html: string;
   body_markdown: string;
-  tags: string[];
+  tags: string;
 };

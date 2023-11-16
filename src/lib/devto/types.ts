@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type User = {
   user_id: number;
   name: string;
@@ -39,5 +41,16 @@ export type Post = {
 export type PostDetails = Post & {
   body_html: string;
   body_markdown: string;
+  content: string;
+  data: string;
   tags: string[];
 };
+
+export type PostFrontMatter  = {
+  title?: string;
+  published?: boolean;
+  tags?: string;
+  cover_image?: string;
+  description?: string;
+  [key: string]: any;
+}
