@@ -8,7 +8,6 @@ export default function About() {
     <div>
       <h1 className="font-bold text-2xl mb-8 tracking-tighter">hey, I'm Daniel Cerverizzo 👋</h1>
       <p className="prose prose-neutral dark:prose-invert">
-
         I am a seasoned Software Development Engineer with an extensive background spanning over 8 years in crafting compelling user interfaces and elevating web applications. Presently, I serve as a Software Development Engineer at &nbsp;
 
         <a href="https://cobrefacil.com.br/" target="_blank" className="border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 rounded p-1 text-sm inline-flex items-center leading-4 text-neutral-900 dark:text-neutral-100 no-underline" rel="noreferrer">

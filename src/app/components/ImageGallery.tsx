@@ -48,26 +48,20 @@ export default function ImageGallery() {
     },
   ];
 
-  const renderedImages: any = [];
-
-  images.forEach((item) => {
-    renderedImages.push(
-      <div className={item.classDiv} key={item.name}>
-        <Image
-          loading="eager"
-          alt={item.alt}
-          src={item.src}
-          layout="fill"
-          objectFit="cover"
-          className={item.classImage}
-        />
-      </div>
-    )
-  });
-
   return (
     <div className="columns-3 gap-4 my-8">
-      {renderedImages}
+      {images.map((item) => (
+        <div key={item.name} className={`relative ${item.classDiv}`}>
+          <Image
+            loading="eager"
+            alt={item.alt}
+            src={item.src}
+            layout="fill"
+            objectFit="cover"
+            className={`rounded-lg ${item.classImage}`}
+          />
+        </div>
+      ))}
     </div>
   );
 }
