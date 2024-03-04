@@ -10,8 +10,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Software Enginner',
-    default: 'Daniel Cerverizzo',
+    template: 'Daniel Cerverizzo | Software Enginner',
+    default: 'Daniel Cerverizzo | Software Enginner',
   },
   description: 'Software Enginner Full Stack ',
   metadataBase: new URL('https://cerverizzo.dev/'),

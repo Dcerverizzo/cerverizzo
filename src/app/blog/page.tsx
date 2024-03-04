@@ -5,7 +5,7 @@ import RecentPosts from "../components/RecentPosts";
 export const metadata: Metadata = {
   title: {
     template: '%s | Software Enginner',
-    default: 'Insightful posts',
+    default: 'Insightful Posts | Daniel Cerverizzo',
   },
   description: 'List posts written by Daniel Cerverizzo',
   metadataBase: new URL('https://cerverizzo.dev/'),

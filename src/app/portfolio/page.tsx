@@ -1,6 +1,16 @@
 import { fetchRepos } from "@/lib/github/fetch";
 import Nav from "../components/Nav";
 import Portfolio from "../components/Portfolio";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Software Enginner',
+    default: 'Portfolio | Daniel Cerverizzo',
+  },
+  description: 'List projects written by Daniel Cerverizzo',
+  metadataBase: new URL('https://cerverizzo.dev/'),
+};
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default async function PortfolioHome() {
