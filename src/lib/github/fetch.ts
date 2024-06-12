@@ -18,8 +18,6 @@ export async function fetchRepos(): Promise<Repo[]> {
   //   url: repo.url,
   // }));
 
-
-
   return [
     {
       name: 'cerverizzo',
@@ -64,15 +62,3 @@ export async function fetchRepos(): Promise<Repo[]> {
   ]
 
 }
-
-// export async function fetchPost(slug: string): Promise<RepoDetails> {
-//   const res = await fetch(
-//     `https://dev.to/api/articles/${process.env.DEVTO_USERNAME}/${slug}`,
-//     {
-//       next: { revalidate: 3 * 60 * 60 },
-//     }
-//   );
-
-//   if (!res.ok) notFound();
-//   return res.json();
-// }

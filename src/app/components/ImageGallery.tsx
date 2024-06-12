@@ -52,14 +52,14 @@ export default function ImageGallery() {
     <div className="columns-3 gap-4 my-8">
       {images.map((item) => (
         <div key={item.name} className={`relative ${item.classDiv}`}>
-          <Image
-            loading="eager"
-            alt={item.alt}
-            src={item.src}
-            layout="fill"
-            objectFit="cover"
-            className={`rounded-lg ${item.classImage}`}
-          />
+        <Image
+          loading="eager"
+          alt={item.alt}
+          src={item.src}
+          fill
+          style={{ objectFit: 'cover' }}
+          className={`rounded-lg ${item.classImage}`}
+        />
         </div>
       ))}
     </div>
