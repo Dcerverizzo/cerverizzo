@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+
+# test-bot
+User-agent: test-bot
+Allow: /blog
+Allow: /portfolio
+
+# Host
+Host: https://cerverizzo.dev/
+
+# Sitemaps
+Sitemap: https://cerverizzo.dev/sitemap.xml

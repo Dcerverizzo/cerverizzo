@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import ThemeSwitcher from './ThemeSwitcher';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import ThemeSwitcher from './ThemeSwitcher'
 
-export default function Nav() {
+export default function Nav () {
   const pathname = usePathname()
 
   const isActive = (href: string) => {
-    return pathname === href;
-  };
+    return pathname === href
+  }
 
   return (
     <div>
@@ -55,5 +55,5 @@ export default function Nav() {
         </div>
       </aside>
     </div>
-  );
+  )
 }

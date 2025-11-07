@@ -1,4 +1,4 @@
-export default function Follow() {
+export default function Follow () {
   return (
     <div>
       <ul className="flex flex-col md:flex-row mt-8 space-x-0 md:space-x-4 space-y-2 md:space-y-0 font-sm text-neutral-600 dark:text-neutral-300">

@@ -5,7 +5,6 @@ module.exports = {
         "node": true
     },
     "extends": [
-        "next",
         "standard-with-typescript",
         "plugin:react/recommended"
     ],
@@ -24,7 +23,13 @@ module.exports = {
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     },
     "plugins": [
         "react"
@@ -32,6 +37,13 @@ module.exports = {
     "rules": {
         // Desabilite as regras que você deseja aqui
         "react/no-unescaped-entities": "off",
-        "@next/next/no-page-custom-font": "off"
+        "@next/next/no-page-custom-font": "off",
+        "react/react-in-jsx-scope": "off"
+        ,
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/member-delimiter-style": "off"
     }
 }
+
+

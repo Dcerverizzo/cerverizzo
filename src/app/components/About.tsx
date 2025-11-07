@@ -3,7 +3,7 @@ import ImageGallery from './ImageGallery'
 import React from 'react'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default function About() {
+export default function About () {
   return (
     <div>
       <h1 className="font-bold text-2xl mb-8 tracking-tighter">hey, I'm Daniel Cerverizzo 👋</h1>
