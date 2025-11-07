@@ -18,7 +18,7 @@ export default async function PortfolioHome () {
   const repos = [
     { name: 'cerverizzo', html_url: 'https://github.com/Dcerverizzo/cerverizzo', url: '' },
     { name: 'financialTools', html_url: 'https://github.com/Dcerverizzo/financialTools', url: '' },
-    { name: 'Porterminal', html_url: 'https://github.com/Dcerverizzo/Porterminal', url: '' },
+    { name: 'Porterminal', html_url: 'https://github.com/Dcerverizzo/Porterminal', url: '' }
   ]
 
   return (

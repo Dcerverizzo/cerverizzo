@@ -1,8 +1,6 @@
 import type { Repo } from './types'
 
 export async function fetchRepos (): Promise<Repo[]> {
-
-
   return [
     {
       name: 'cerverizzo',
