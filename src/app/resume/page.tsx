@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-const DRIVE_PDF_URL = process.env.NEXT_PUBLIC_RESUME_URL || 'https://drive.google.com/file/d/1CNJNoILKdnWzMjIb6hsmstEqM7CzYHQR/view?usp=sharing'
+const DRIVE_PDF_URL = process.env.NEXT_PUBLIC_RESUME_URL ?? 'https://drive.google.com/file/d/1CNJNoILKdnWzMjIb6hsmstEqM7CzYHQR/view?usp=sharing'
 
 export default function ResumePage () {
   return (
