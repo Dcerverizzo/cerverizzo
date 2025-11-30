@@ -1,23 +1,23 @@
 // import { fetchRepos } from '@/lib/github/fetch'
-import { fetchRepos } from "@/lib/github/fetch";
-import Nav from "../components/Nav";
-import { type Metadata } from "next";
-import Link from "next/link";
-import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+import { fetchRepos } from '@/lib/github/fetch'
+import Nav from '../components/Nav'
+import { type Metadata } from 'next'
+import Link from 'next/link'
+import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Software Engineer",
-    default: "Portfolio | Daniel Cerverizzo",
+    template: '%s | Software Engineer',
+    default: 'Portfolio | Daniel Cerverizzo'
   },
-  description: "List projects written by Daniel Cerverizzo",
-  metadataBase: new URL("https://cerverizzo.dev/"),
-};
+  description: 'List projects written by Daniel Cerverizzo',
+  metadataBase: new URL('https://cerverizzo.dev/')
+}
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default async function PortfolioHome() {
+export default async function PortfolioHome () {
   // placeholder repos shown when API access is not configured
-  const repos = await fetchRepos();
+  const repos = await fetchRepos()
 
   return (
     <div className="w-full min-h-screen">
@@ -48,9 +48,9 @@ export default async function PortfolioHome() {
                 {/* BADGE (Language) */}
                 <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 flex items-center gap-2">
                   <span className="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
-                  {repo.language || "Project"}
+                  {repo.language ?? 'Project'}
                 </p>
-
+f
                 {/* TITLE */}
                 <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
                   {repo.name}
@@ -58,8 +58,8 @@ export default async function PortfolioHome() {
 
                 {/* DESCRIPTION */}
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {repo.description ||
-                    "A curated project showcasing code and architecture decisions."}
+                  {repo.description ??
+                    'A curated project showcasing code and architecture decisions.'}
                 </p>
 
                 {/* STARS + DATE */}
@@ -69,13 +69,13 @@ export default async function PortfolioHome() {
                   </span>
 
                   <span>
-                    {repo.created_at
-                      ? new Date(repo.created_at).toLocaleDateString("pt-BR", {
-                          day: "2-digit",
-                          month: "short",
-                          year: "numeric",
-                        })
-                      : "Unknown"}
+                    {repo.created_at != null
+                      ? new Date(repo.created_at).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
+                      })
+                      : 'Unknown'}
                   </span>
                 </div>
 
@@ -117,5 +117,5 @@ export default async function PortfolioHome() {
         </main>
       </div>
     </div>
-  );
+  )
 }
