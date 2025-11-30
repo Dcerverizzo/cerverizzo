@@ -50,7 +50,7 @@ export default async function PortfolioHome () {
                   <span className="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
                   {repo.language ?? 'Project'}
                 </p>
-f
+
                 {/* TITLE */}
                 <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
                   {repo.name}

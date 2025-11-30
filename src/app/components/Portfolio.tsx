@@ -15,7 +15,6 @@ export default function Portfolio ({ repos = [] }: Props) {
     <section aria-labelledby="portfolio-heading">
       <div className="container px-6 py-10 mx-auto">
         <h1 id="portfolio-heading" className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">Portfolio</h1>
-
         <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 lg:grid-cols-2">
           {repos.map((repo) => (
             <a key={repo.name} href={repo.html_url} target="_blank" rel="noopener noreferrer" className="group">
