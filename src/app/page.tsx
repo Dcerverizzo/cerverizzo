@@ -22,6 +22,8 @@ export default function Home () {
       <section>
         <About />
         <RecentPosts limit={3} />
+        <figure><embed src="https://wakatime.com/share/@dancerverizzo/a380e2ba-c745-4643-9327-b037e162853b.svg"
+        className='flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0'></embed></figure>
         <Follow />
       </section>
     </div>
