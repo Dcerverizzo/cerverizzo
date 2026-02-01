@@ -3,24 +3,24 @@ import { type Post, type PostDetails } from './types'
 
 export async function fetchPosts (): Promise<Post[]> {
   const res = await fetch(
-    `https://dev.to/api/articles?username=${process.env.DEVTO_USERNAME}`,
-    {
-      next: { revalidate: 3 * 60 * 60 }
-    }
+    `https://dev.to/api/articles?username=${process.env.DEVTO_USERNAME}&per_page=100`,
+    { cache: 'no-store' }
   )
 
   if (!res.ok) notFound()
-  return await res.json()
+
+  const data: Post[] = await res.json()
+  return data
 }
 
 export async function fetchPost (slug: string): Promise<PostDetails> {
   const res = await fetch(
     `https://dev.to/api/articles/${process.env.DEVTO_USERNAME}/${slug}`,
-    {
-      next: { revalidate: 3 * 60 * 60 }
-    }
+    { cache: 'no-store' }
   )
 
   if (!res.ok) notFound()
-  return await res.json()
+
+  const data: PostDetails = await res.json()
+  return data
 }
