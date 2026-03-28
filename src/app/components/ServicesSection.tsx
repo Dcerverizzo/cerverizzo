@@ -1,55 +1,34 @@
 'use client'
 
-const services = [
-  {
-    number: '01',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M3 9h18M9 21V9" />
-      </svg>
-    ),
-    title: 'Desenvolvimento de Sites Personalizados',
-    description: 'Sites e aplicações web sob medida, com foco em performance, acessibilidade e experiência do usuário. Do design ao deploy.',
-    link: '#contact'
-  },
-  {
-    number: '02',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-      </svg>
-    ),
-    title: 'Consultoria de Tecnologia Online',
-    description: 'Orientação estratégica para decisões tecnológicas, arquitetura de sistemas e escolha de stack. Sessões online para empresas e founders.',
-    link: '#contact'
-  },
-  {
-    number: '03',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-      </svg>
-    ),
-    title: 'UI/UX Engineering',
-    description: 'Interfaces de alta fidelidade com animações e micro-interações. Implementação pixel-perfect a partir de designs Figma e referências visuais.',
-    link: '#contact'
-  },
-  {
-    number: '04',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-      </svg>
-    ),
-    title: 'Integração de APIs & Backend',
-    description: 'Desenvolvimento de APIs RESTful, integração com serviços externos e soluções backend escaláveis com Node.js, Python e bancos de dados modernos.',
-    link: '#contact'
-  }
+import { useTranslation } from '@/contexts/LanguageContext'
+import type { ReactNode } from 'react'
+
+const serviceIcons: ReactNode[] = [
+  <svg key="0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+    <path d="M3 9h18M9 21V9" />
+  </svg>,
+  <svg key="1" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+  </svg>,
+  <svg key="2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+  </svg>,
+  <svg key="3" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+  </svg>
 ]
 
 export default function ServicesSection () {
+  const { t } = useTranslation()
+
+  const services = t.services.items.map((item, i) => ({
+    ...item,
+    icon: serviceIcons[i],
+    link: '#contact'
+  }))
+
   return (
     <section
       id="services"
@@ -68,7 +47,7 @@ export default function ServicesSection () {
               textTransform: 'uppercase',
               color: 'var(--color-accent-primary)'
             }}>
-              02
+              {t.services.index}
             </span>
           </div>
           <h2 style={{
@@ -80,7 +59,7 @@ export default function ServicesSection () {
             color: 'var(--color-text-primary)',
             margin: '0 0 16px'
           }}>
-            Serviços
+            {t.services.heading}
           </h2>
           <p style={{
             fontFamily: 'var(--font-body)',
@@ -91,7 +70,7 @@ export default function ServicesSection () {
             lineHeight: 'var(--leading-body)',
             margin: 0
           }}>
-            Soluções digitais completas para negócios que querem se destacar online.
+            {t.services.subtitle}
           </p>
         </div>
 
@@ -105,7 +84,7 @@ export default function ServicesSection () {
           }}
         >
           {services.map((service) => (
-            <ServiceCard key={service.number} service={service} />
+            <ServiceCard key={service.number} service={service} cta={t.services.cta} />
           ))}
         </div>
       </div>
@@ -113,7 +92,15 @@ export default function ServicesSection () {
   )
 }
 
-function ServiceCard ({ service }: { service: typeof services[0] }) {
+interface ServiceItem {
+  number: string
+  title: string
+  description: string
+  icon: ReactNode
+  link: string
+}
+
+function ServiceCard ({ service, cta }: { service: ServiceItem; cta: string }) {
   return (
     <div
       className="reveal"
@@ -191,7 +178,7 @@ function ServiceCard ({ service }: { service: typeof services[0] }) {
           width: 'fit-content'
         }}
       >
-        Saiba mais →
+        {cta} →
       </a>
     </div>
   )

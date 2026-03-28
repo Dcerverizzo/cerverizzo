@@ -1,7 +1,12 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslation } from '@/contexts/LanguageContext'
 
 export default function HeroSection () {
+  const { t } = useTranslation()
+
   return (
     <section
       style={{
@@ -27,7 +32,7 @@ export default function HeroSection () {
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.6) 50%, #0A0A0A 100%)'
+          background: 'linear-gradient(to bottom, rgba(var(--background-start-rgb),0.15) 0%, rgba(var(--background-start-rgb),0.6) 50%, var(--color-bg-base) 100%)'
         }} />
       </div>
 
@@ -38,7 +43,7 @@ export default function HeroSection () {
       >
         {/* Available label */}
         <div className="hero-label" style={{ marginBottom: '28px' }}>
-          <span className="tag-accent">[ Disponível para projetos ]</span>
+          <span className="tag-accent">{t.hero.available}</span>
         </div>
 
         {/* Name */}
@@ -70,7 +75,7 @@ export default function HeroSection () {
             maxWidth: '480px'
           }}
         >
-          Software Engineer Full Stack com mais de 8 anos construindo interfaces e produtos digitais de alto impacto.
+          {t.hero.subtitle}
         </p>
 
         {/* CTA Buttons */}
@@ -85,7 +90,7 @@ export default function HeroSection () {
               alignItems: 'center',
               padding: '14px 32px',
               backgroundColor: 'var(--color-accent-primary)',
-              color: '#0A0A0A',
+              color: 'var(--color-bg-base)',
               fontFamily: 'var(--font-body)',
               fontSize: 'var(--text-xs)',
               fontWeight: 600,
@@ -96,7 +101,7 @@ export default function HeroSection () {
               transition: 'opacity 0.2s ease'
             }}
           >
-            Ver Projetos
+            {t.hero.cta_primary}
           </Link>
           <a
             href="#contact"
@@ -117,7 +122,7 @@ export default function HeroSection () {
               transition: 'border-color 0.2s ease'
             }}
           >
-            Entre em Contato
+            {t.hero.cta_secondary}
           </a>
         </div>
       </div>
@@ -143,7 +148,7 @@ export default function HeroSection () {
           textTransform: 'uppercase',
           color: 'var(--color-text-muted)'
         }}>
-          scroll
+          {t.hero.scroll}
         </span>
         <div
           className="scroll-line"

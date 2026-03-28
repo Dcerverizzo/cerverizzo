@@ -1,11 +1,7 @@
-import Link from 'next/link'
+'use client'
 
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/resume', label: 'Currículo' }
-]
+import Link from 'next/link'
+import { useTranslation } from '@/contexts/LanguageContext'
 
 const socialLinks = [
   { href: 'https://linkedin.com/in/daniel-cerverizzo', label: 'LinkedIn' },
@@ -15,6 +11,15 @@ const socialLinks = [
 ]
 
 export default function SiteFooter () {
+  const { t } = useTranslation()
+
+  const navLinks = [
+    { href: '/', label: t.nav.home },
+    { href: '/portfolio', label: t.nav.portfolio },
+    { href: '/blog', label: t.nav.blog },
+    { href: '/resume', label: t.nav.resume }
+  ]
+
   return (
     <footer style={{
       backgroundColor: 'var(--color-bg-base)',
@@ -51,7 +56,7 @@ export default function SiteFooter () {
               margin: 0,
               maxWidth: '260px'
             }}>
-              Software Engineer Full Stack. Sites personalizados e consultoria de tecnologia online.
+              {t.footer.tagline}
             </p>
           </div>
 
@@ -65,7 +70,7 @@ export default function SiteFooter () {
               color: 'var(--color-text-muted)',
               margin: '0 0 16px'
             }}>
-              Navegação
+              {t.footer.nav_label}
             </p>
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {navLinks.map((link) => (
@@ -96,7 +101,7 @@ export default function SiteFooter () {
               color: 'var(--color-text-muted)',
               margin: '0 0 16px'
             }}>
-              Redes
+              {t.footer.social_label}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {socialLinks.map((link) => (
@@ -139,14 +144,14 @@ export default function SiteFooter () {
             fontSize: 'var(--text-xs)',
             color: 'var(--color-text-muted)'
           }}>
-            © {new Date().getFullYear()} Daniel Cerverizzo. Todos os direitos reservados.
+            {t.footer.rights(new Date().getFullYear())}
           </span>
           <span style={{
             fontFamily: 'var(--font-body)',
             fontSize: 'var(--text-xs)',
             color: 'var(--color-text-muted)'
           }}>
-            Feito com Next.js & Tailwind CSS
+            {t.footer.made_with}
           </span>
         </div>
       </div>

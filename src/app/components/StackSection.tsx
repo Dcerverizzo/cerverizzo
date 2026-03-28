@@ -1,25 +1,29 @@
 'use client'
 
+import { useTranslation } from '@/contexts/LanguageContext'
+
 const stackGroups = [
   {
-    category: 'Frontend',
+    key: 'frontend' as const,
     items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML / CSS']
   },
   {
-    category: 'Backend',
+    key: 'backend' as const,
     items: ['Node.js', 'Python', 'PHP', 'Ruby on Rails', 'Express', 'Laravel']
   },
   {
-    category: 'Database',
+    key: 'database' as const,
     items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis']
   },
   {
-    category: 'DevOps & Ferramentas',
+    key: 'devops' as const,
     items: ['Docker', 'AWS', 'Git', 'CI/CD', 'Linux', 'Figma']
   }
 ]
 
 export default function StackSection () {
+  const { t } = useTranslation()
+
   return (
     <section
       id="stack"
@@ -38,7 +42,7 @@ export default function StackSection () {
               textTransform: 'uppercase',
               color: 'var(--color-accent-primary)'
             }}>
-              04
+              {t.stack.index}
             </span>
           </div>
           <h2 style={{
@@ -50,15 +54,15 @@ export default function StackSection () {
             color: 'var(--color-text-primary)',
             margin: 0
           }}>
-            Stack Tecnológico
+            {t.stack.heading}
           </h2>
         </div>
 
         {/* Stack groups */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-          {stackGroups.map((group, groupIndex) => (
+          {stackGroups.map((group) => (
             <div
-              key={group.category}
+              key={group.key}
               className="reveal"
               style={{
                 borderTop: '1px solid var(--color-border)',
@@ -79,7 +83,7 @@ export default function StackSection () {
                     textTransform: 'uppercase',
                     color: 'var(--color-text-muted)'
                   }}>
-                    {group.category}
+                    {t.stack.categories[group.key]}
                   </span>
                 </div>
 

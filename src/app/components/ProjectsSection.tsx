@@ -1,6 +1,9 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
-import { fetchRepos } from '@/lib/github/fetch'
+import { useTranslation } from '@/contexts/LanguageContext'
+import type { Repo } from '@/lib/github/types'
 
 const langColor: Record<string, string> = {
   TypeScript: '#3178c6',
@@ -11,10 +14,16 @@ const langColor: Record<string, string> = {
   Shell: '#89e051'
 }
 
-export default async function ProjectsSection () {
-  const repos = await fetchRepos()
+interface Props {
+  repos: Repo[]
+}
+
+export default function ProjectsSection ({ repos }: Props) {
+  const { t } = useTranslation()
   const featured = repos[0]
   const others = repos.slice(1, 5)
+
+  if (repos.length === 0) return null
 
   return (
     <section
@@ -34,7 +43,7 @@ export default async function ProjectsSection () {
               textTransform: 'uppercase',
               color: 'var(--color-accent-primary)'
             }}>
-              03
+              {t.projects.index}
             </span>
           </div>
           <h2 style={{
@@ -46,7 +55,7 @@ export default async function ProjectsSection () {
             color: 'var(--color-text-primary)',
             margin: 0
           }}>
-            Projetos Destacados
+            {t.projects.heading}
           </h2>
         </div>
 
@@ -94,8 +103,8 @@ export default async function ProjectsSection () {
             >
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 <span className="tag-accent">{featured.language ?? 'Web'}</span>
-                {featured.topics?.slice(0, 2).map((t) => (
-                  <span key={t} className="tag-editorial">{t}</span>
+                {featured.topics?.slice(0, 2).map((topic) => (
+                  <span key={topic} className="tag-editorial">{topic}</span>
                 ))}
               </div>
               <h3 style={{
@@ -134,7 +143,7 @@ export default async function ProjectsSection () {
                     borderRadius: 'var(--radius-sm)'
                   }}
                 >
-                  GitHub →
+                  {t.projects.github}
                 </a>
                 {(featured.homepage != null && featured.homepage !== '') && (
                   <a
@@ -153,7 +162,7 @@ export default async function ProjectsSection () {
                       borderRadius: 'var(--radius-sm)'
                     }}
                   >
-                    Ver Live →
+                    {t.projects.live}
                   </a>
                 )}
               </div>
@@ -252,7 +261,7 @@ export default async function ProjectsSection () {
                     textDecoration: 'none'
                   }}
                 >
-                  GitHub →
+                  {t.projects.github}
                 </a>
               </div>
             </div>
@@ -279,7 +288,7 @@ export default async function ProjectsSection () {
               transition: 'border-color 0.2s ease'
             }}
           >
-            Ver todos os projetos →
+            {t.projects.cta}
           </Link>
         </div>
       </div>

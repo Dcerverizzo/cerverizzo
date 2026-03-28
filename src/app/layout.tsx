@@ -22,11 +22,19 @@ export const metadata: Metadata = {
 export default function RootLayout ({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <Provider>
-        <body className="antialiased">
+      <head>
+        {/* Apply saved theme before first paint to avoid flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('portfolio-theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t||p)}catch(e){}})();`
+          }}
+        />
+      </head>
+      <body className="antialiased">
+        <Provider>
           {children}
-        </body>
-      </Provider>
+        </Provider>
+      </body>
     </html>
   )
 }

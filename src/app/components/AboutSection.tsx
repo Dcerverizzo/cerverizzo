@@ -1,13 +1,12 @@
-import Image from 'next/image'
+'use client'
 
-const stats = [
-  { number: '8+', label: 'Anos de exp.' },
-  { number: '50+', label: 'Projetos' },
-  { number: '10+', label: 'Tecnologias' },
-  { number: '3', label: 'Países' }
-]
+import Image from 'next/image'
+import { useTranslation } from '@/contexts/LanguageContext'
 
 export default function AboutSection () {
+  const { t } = useTranslation()
+  const stats = t.about.stats
+
   return (
     <section
       id="about"
@@ -29,7 +28,7 @@ export default function AboutSection () {
                 textTransform: 'uppercase',
                 color: 'var(--color-accent-primary)'
               }}>
-                01
+                {t.about.index}
               </span>
             </div>
 
@@ -42,7 +41,7 @@ export default function AboutSection () {
               color: 'var(--color-text-primary)',
               margin: '0 0 32px'
             }}>
-              Sobre mim
+              {t.about.heading}
             </h2>
 
             <p style={{
@@ -53,7 +52,7 @@ export default function AboutSection () {
               color: 'var(--color-text-secondary)',
               margin: '0 0 16px'
             }}>
-              Sou um Engenheiro de Software Full Stack com mais de 8 anos de experiência na construção de interfaces e aplicações web de alto desempenho.
+              {t.about.p1}
             </p>
             <p style={{
               fontFamily: 'var(--font-body)',
@@ -63,7 +62,7 @@ export default function AboutSection () {
               color: 'var(--color-text-secondary)',
               margin: '0 0 48px'
             }}>
-              Atualmente atuo como Software Development Engineer na Cobre Fácil, especializado na construção de componentes UX/UI com JavaScript, React, Next.js, TypeScript e Node.js. Também ofereço serviços de desenvolvimento de sites personalizados e consultoria de tecnologia online.
+              {t.about.p2}
             </p>
 
             {/* Stats */}

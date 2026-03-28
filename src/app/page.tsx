@@ -9,6 +9,7 @@ import ContactSection from './components/ContactSection'
 import SiteFooter from './components/SiteFooter'
 import CustomCursor from './components/CustomCursor'
 import ScrollReveal from './components/ScrollReveal'
+import { fetchRepos } from '@/lib/github/fetch'
 import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://cerverizzo.dev/')
 }
 
-export default function Home () {
+export default async function Home () {
+  const repos = await fetchRepos()
+
   return (
     <>
       <Nav />
@@ -27,7 +30,7 @@ export default function Home () {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <ProjectsSection />
+        <ProjectsSection repos={repos} />
         <StackSection />
         <ExperienceSection />
         <ContactSection />

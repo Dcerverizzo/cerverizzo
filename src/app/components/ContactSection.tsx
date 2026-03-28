@@ -1,4 +1,10 @@
+'use client'
+
+import { useTranslation } from '@/contexts/LanguageContext'
+
 export default function ContactSection () {
+  const { t } = useTranslation()
+
   return (
     <section
       id="contact"
@@ -16,7 +22,7 @@ export default function ContactSection () {
             textTransform: 'uppercase',
             color: 'var(--color-accent-primary)'
           }}>
-            06
+            {t.contact.index}
           </span>
         </div>
 
@@ -31,7 +37,7 @@ export default function ContactSection () {
             letterSpacing: 'var(--tracking-tight)',
             margin: '0 0 8px'
           }}>
-            Vamos construir algo
+            {t.contact.heading_line1}
           </p>
           <h2 style={{
             fontFamily: 'var(--font-display)',
@@ -42,7 +48,7 @@ export default function ContactSection () {
             letterSpacing: 'var(--tracking-tight)',
             margin: 0
           }}>
-            extraordinário.
+            {t.contact.heading_line2}
           </h2>
         </div>
 
@@ -70,7 +76,7 @@ export default function ContactSection () {
               transition: 'opacity 0.2s ease'
             }}
           >
-            Enviar mensagem
+            {t.contact.cta_email}
           </a>
           <a
             href="https://linkedin.com/in/daniel-cerverizzo"
@@ -94,7 +100,7 @@ export default function ContactSection () {
               transition: 'border-color 0.2s ease'
             }}
           >
-            LinkedIn →
+            {t.contact.cta_linkedin}
           </a>
         </div>
 

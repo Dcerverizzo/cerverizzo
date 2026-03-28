@@ -1,44 +1,14 @@
+'use client'
+
 import { DocumentArrowDownIcon } from '@heroicons/react/24/outline'
+import { useTranslation } from '@/contexts/LanguageContext'
 
 const DRIVE_PDF_URL = process.env.NEXT_PUBLIC_RESUME_URL ?? 'https://drive.google.com/file/d/1CNJNoILKdnWzMjIb6hsmstEqM7CzYHQR/view?usp=sharing'
 
-const timeline = [
-  {
-    role: 'Software Development Engineer',
-    company: 'Cobre Fácil',
-    period: '2022 — Presente',
-    current: true,
-    bullets: [
-      'Desenvolvimento de componentes UX/UI com React, Next.js e TypeScript',
-      'Construção e manutenção de APIs RESTful com Node.js',
-      'Otimização de performance e acessibilidade em aplicações de grande escala'
-    ]
-  },
-  {
-    role: 'Software Engineer Full Stack',
-    company: 'Projetos & Freelance',
-    period: '2018 — 2022',
-    current: false,
-    bullets: [
-      'Desenvolvimento de sites e sistemas personalizados para clientes nacionais e internacionais',
-      'Consultoria técnica para startups em fase de produto',
-      'Palestrante em eventos de tecnologia (SistemasBR, Didática Tech)'
-    ]
-  },
-  {
-    role: 'Desenvolvedor Web',
-    company: 'Agências & CLT',
-    period: '2016 — 2018',
-    current: false,
-    bullets: [
-      'Desenvolvimento Frontend com HTML, CSS, JavaScript e PHP',
-      'Criação de e-commerces e landing pages de alta conversão',
-      'Suporte técnico e manutenção de sistemas legados'
-    ]
-  }
-]
-
 export default function ExperienceSection () {
+  const { t } = useTranslation()
+  const timeline = t.experience.timeline
+
   return (
     <section
       id="experience"
@@ -57,7 +27,7 @@ export default function ExperienceSection () {
               textTransform: 'uppercase',
               color: 'var(--color-accent-primary)'
             }}>
-              05
+              {t.experience.index}
             </span>
           </div>
           <h2 style={{
@@ -69,7 +39,7 @@ export default function ExperienceSection () {
             color: 'var(--color-text-primary)',
             margin: 0
           }}>
-            Experiência
+            {t.experience.heading}
           </h2>
         </div>
 
@@ -190,7 +160,7 @@ export default function ExperienceSection () {
                 color: 'var(--color-text-primary)',
                 margin: 0
               }}>
-                Currículo Completo
+                {t.experience.resume_heading}
               </h3>
               <p style={{
                 fontFamily: 'var(--font-body)',
@@ -200,7 +170,7 @@ export default function ExperienceSection () {
                 lineHeight: 'var(--leading-body)',
                 margin: 0
               }}>
-                Faça o download do meu currículo completo em PDF para uma visão detalhada da minha experiência e habilidades.
+                {t.experience.resume_description}
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <a
@@ -226,7 +196,7 @@ export default function ExperienceSection () {
                   }}
                 >
                   <DocumentArrowDownIcon width={16} height={16} />
-                  Download PDF
+                  {t.experience.download_pdf}
                 </a>
                 <a
                   href="/resume"
@@ -246,7 +216,7 @@ export default function ExperienceSection () {
                     borderRadius: 'var(--radius-sm)'
                   }}
                 >
-                  Ver online →
+                  {t.experience.view_online}
                 </a>
               </div>
             </div>
