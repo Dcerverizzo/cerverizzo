@@ -13,13 +13,21 @@ interface PortfolioFiltersProps {
 
 type SortOption = 'stars' | 'date-desc' | 'date-asc' | 'name'
 
+const languageColors: Record<string, string> = {
+  TypeScript: '#3178C6',
+  JavaScript: '#F7DF1E',
+  Python: '#3572A5',
+  PHP: '#777BB4',
+  Ruby: '#CC342D',
+  Shell: '#89E051'
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default function PortfolioFilters ({ repos, featuredRepos = [] }: PortfolioFiltersProps) {
   const [search, setSearch] = useState('')
   const [selectedLanguage, setSelectedLanguage] = useState<string>('all')
   const [sortBy, setSortBy] = useState<SortOption>('stars')
 
-  // Extract unique languages
   const languages = useMemo(() => {
     const langs = new Set<string>()
     repos.forEach(repo => {
@@ -30,7 +38,6 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
     return Array.from(langs).sort()
   }, [repos])
 
-  // Filter and sort repos
   const filteredRepos = useMemo(() => {
     let result = repos.filter(repo => {
       const searchLower = search.toLowerCase()
@@ -48,7 +55,6 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
       return matchesSearch && matchesLanguage
     })
 
-    // Sort
     result = [...result].sort((a, b) => {
       switch (sortBy) {
         case 'stars':
@@ -67,44 +73,58 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
     return result
   }, [repos, search, selectedLanguage, sortBy])
 
-  // Separate featured and regular repos
   const featured = filteredRepos.filter(r => featuredRepos.includes(r.name))
   const regular = filteredRepos.filter(r => !featuredRepos.includes(r.name))
-
-  const languageColors: Record<string, string> = {
-    TypeScript: 'bg-blue-500',
-    JavaScript: 'bg-yellow-400',
-    Python: 'bg-green-500',
-    PHP: 'bg-purple-500',
-    Ruby: 'bg-red-500',
-    Shell: 'bg-gray-500'
-  }
 
   return (
     <div>
       {/* Filters Bar */}
-      <div className="mb-6 flex flex-col sm:flex-row gap-4">
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 'var(--space-3)',
+        marginBottom: 'var(--space-8)'
+      }}>
         {/* Search */}
-        <div className="relative flex-1">
-          <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+        <div style={{ position: 'relative', flex: '1 1 220px' }}>
+          <MagnifyingGlassIcon style={{
+            position: 'absolute',
+            left: '12px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '16px',
+            height: '16px',
+            color: 'var(--color-text-muted)'
+          }} />
           <input
             type="text"
-            placeholder="Search projects..."
+            placeholder="Buscar projetos..."
             value={search}
             onChange={(e) => { setSearch(e.target.value) }}
-            className="w-full pl-10 pr-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-editorial"
+            style={{ paddingLeft: '36px' }}
           />
         </div>
 
         {/* Language Filter */}
-        <div className="relative">
-          <FunnelIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+        <div style={{ position: 'relative' }}>
+          <FunnelIcon style={{
+            position: 'absolute',
+            left: '12px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '16px',
+            height: '16px',
+            color: 'var(--color-text-muted)',
+            pointerEvents: 'none'
+          }} />
           <select
             value={selectedLanguage}
             onChange={(e) => { setSelectedLanguage(e.target.value) }}
-            className="pl-10 pr-8 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
+            className="select-editorial"
+            style={{ paddingLeft: '36px', paddingRight: '32px' }}
           >
-            <option value="all">All Languages</option>
+            <option value="all">Todas as linguagens</option>
             {languages.map(lang => (
               <option key={lang} value={lang}>{lang}</option>
             ))}
@@ -115,30 +135,51 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
         <select
           value={sortBy}
           onChange={(e) => { setSortBy(e.target.value as SortOption) }}
-          className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
+          className="select-editorial"
+          style={{ paddingRight: '32px' }}
         >
-          <option value="stars">Most Stars</option>
-          <option value="date-desc">Newest First</option>
-          <option value="date-asc">Oldest First</option>
-          <option value="name">Alphabetical</option>
+          <option value="stars">Mais estrelas</option>
+          <option value="date-desc">Mais recentes</option>
+          <option value="date-asc">Mais antigos</option>
+          <option value="name">Alfabético</option>
         </select>
       </div>
 
       {/* Results count */}
-      <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
-        Showing {filteredRepos.length} of {repos.length} projects
+      <p style={{
+        fontFamily: 'var(--font-body)',
+        fontSize: 'var(--text-xs)',
+        letterSpacing: 'var(--tracking-widest)',
+        textTransform: 'uppercase',
+        color: 'var(--color-text-muted)',
+        marginBottom: 'var(--space-8)'
+      }}>
+        {filteredRepos.length} de {repos.length} projetos
       </p>
 
       {/* Featured Section */}
       {featured.length > 0 && (
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <StarIcon className="w-5 h-5 text-yellow-500" />
-            Featured Projects
+        <section style={{ marginBottom: 'var(--space-16)' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'var(--text-lg)',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            marginBottom: 'var(--space-6)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <StarIcon style={{ width: '18px', height: '18px', color: 'var(--color-accent-primary)' }} />
+            Destaque
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gap: 'var(--space-6)'
+          }}>
             {featured.map((repo) => (
-              <ProjectCard key={repo.name} repo={repo} featured languageColors={languageColors} />
+              <ProjectCard key={repo.name} repo={repo} featured />
             ))}
           </div>
         </section>
@@ -146,23 +187,50 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
 
       {/* All Projects */}
       <section>
-        {featured.length > 0 && <h2 className="text-xl font-semibold mb-4">All Projects</h2>}
+        {featured.length > 0 && (
+          <h2 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'var(--text-lg)',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            marginBottom: 'var(--space-6)'
+          }}>
+            Todos os projetos
+          </h2>
+        )}
         {filteredRepos.length === 0
           ? (
-          <div className="text-center py-12 text-neutral-500 dark:text-neutral-400">
-            <p>No projects found matching your criteria.</p>
+          <div style={{
+            textAlign: 'center',
+            padding: 'var(--space-24) 0',
+            color: 'var(--color-text-muted)',
+            fontFamily: 'var(--font-body)'
+          }}>
+            <p>Nenhum projeto encontrado.</p>
             <button
               onClick={() => { setSearch(''); setSelectedLanguage('all') }}
-              className="mt-2 text-blue-600 hover:underline"
+              style={{
+                marginTop: 'var(--space-3)',
+                color: 'var(--color-accent-primary)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-sm)'
+              }}
             >
-              Clear filters
+              Limpar filtros
             </button>
           </div>
             )
           : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: 'var(--space-6)'
+          }}>
             {regular.map((repo) => (
-              <ProjectCard key={repo.name} repo={repo} languageColors={languageColors} />
+              <ProjectCard key={repo.name} repo={repo} />
             ))}
           </div>
             )}
@@ -174,52 +242,112 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
 interface ProjectCardProps {
   repo: Repo
   featured?: boolean
-  languageColors: Record<string, string>
 }
 
-function ProjectCard ({ repo, featured = false, languageColors }: ProjectCardProps): JSX.Element {
+function ProjectCard ({ repo, featured = false }: ProjectCardProps): JSX.Element {
+  const langColor = languageColors[repo.language ?? ''] ?? '#5A5550'
+
   return (
-    <article
-      className={`group bg-white dark:bg-gray-900 rounded-2xl shadow hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 ${featured ? 'ring-2 ring-yellow-400' : ''}`}
-    >
-      {/* Cover Image */}
-      <div className="relative h-40 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
+    <article className="card-editorial" style={{
+      outline: featured ? '1px solid var(--color-accent-line)' : 'none'
+    }}>
+      {/* Cover */}
+      <div style={{
+        position: 'relative',
+        height: '140px',
+        background: 'linear-gradient(135deg, var(--color-bg-subtle) 0%, var(--color-bg-elevated) 100%)',
+        overflow: 'hidden'
+      }}>
         <img
           src="/images/code.jpg"
           alt="code"
-          className="object-cover w-full h-full opacity-50 group-hover:scale-110 transition-transform duration-500"
+          style={{
+            objectFit: 'cover',
+            width: '100%',
+            height: '100%',
+            opacity: 0.3
+          }}
         />
         {featured && (
-          <div className="absolute top-3 right-3 bg-yellow-400 text-yellow-900 px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-            <StarIcon className="w-3 h-3" />
-            Featured
+          <div style={{
+            position: 'absolute',
+            top: '12px',
+            right: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            backgroundColor: 'var(--color-accent-primary)',
+            color: '#0A0A0A',
+            padding: '4px 10px',
+            borderRadius: 'var(--radius-full)',
+            fontSize: 'var(--text-xs)',
+            fontFamily: 'var(--font-body)',
+            fontWeight: 600,
+            letterSpacing: 'var(--tracking-wide)'
+          }}>
+            <StarIcon style={{ width: '10px', height: '10px' }} />
+            Destaque
           </div>
         )}
       </div>
 
-      {/* Card Body */}
-      <div className="p-5 space-y-3">
-        {/* Badge (Language) */}
-        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 flex items-center gap-2">
-          <span className={`inline-block w-2 h-2 rounded-full ${languageColors[repo.language ?? ''] ?? 'bg-gray-400'}`}></span>
+      {/* Body */}
+      <div style={{ padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+        {/* Language badge */}
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-xs)',
+          letterSpacing: 'var(--tracking-widest)',
+          textTransform: 'uppercase',
+          color: 'var(--color-text-muted)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px'
+        }}>
+          <span style={{
+            display: 'inline-block',
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            backgroundColor: langColor
+          }} />
           {repo.language ?? 'Project'}
         </p>
 
         {/* Title */}
-        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 transition-colors">
+        <h3 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'var(--text-base)',
+          fontWeight: 700,
+          color: 'var(--color-text-primary)',
+          margin: 0
+        }}>
           {repo.name}
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">
-          {repo.description ?? 'A curated project showcasing code and architecture decisions.'}
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-sm)',
+          color: 'var(--color-text-secondary)',
+          lineHeight: 'var(--leading-body)',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden'
+        }}>
+          {repo.description ?? 'Um projeto de software com código e decisões de arquitetura.'}
         </p>
 
         {/* Stars + Date */}
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-          <span className="flex items-center gap-1">
-            ⭐ {repo.stargazers_count}
-          </span>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-xs)',
+          color: 'var(--color-text-muted)'
+        }}>
+          <span>⭐ {repo.stargazers_count}</span>
           <span>
             {repo.created_at != null
               ? new Date(repo.created_at).toLocaleDateString('pt-BR', {
@@ -227,53 +355,112 @@ function ProjectCard ({ repo, featured = false, languageColors }: ProjectCardPro
                 month: 'short',
                 year: 'numeric'
               })
-              : 'Unknown'}
+              : '—'}
           </span>
         </div>
 
-        {/* Tags / Topics */}
+        {/* Topics */}
         {Array.isArray(repo.topics) && repo.topics.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
             {repo.topics.slice(0, 4).map((topic) => (
-              <span
-                key={topic}
-                className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors cursor-default"
-              >
-                #{topic}
-              </span>
+              <span key={topic} className="tag-editorial">#{topic}</span>
             ))}
             {repo.topics.length > 4 && (
-              <span className="text-xs text-neutral-400">+{repo.topics.length - 4}</span>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)' }}>
+                +{repo.topics.length - 4}
+              </span>
             )}
           </div>
         )}
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2 pt-3">
+        {/* Actions */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', paddingTop: 'var(--space-2)' }}>
           <a
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 py-2 border rounded-lg text-sm dark:border-gray-700 inline-flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors whitespace-nowrap"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '7px 14px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-sm)',
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-xs)',
+              letterSpacing: 'var(--tracking-wide)',
+              textTransform: 'uppercase',
+              color: 'var(--color-text-secondary)',
+              textDecoration: 'none',
+              transition: 'border-color 0.2s ease, color 0.2s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'var(--color-border-hover)'
+              e.currentTarget.style.color = 'var(--color-text-primary)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--color-border)'
+              e.currentTarget.style.color = 'var(--color-text-secondary)'
+            }}
           >
-            <ArrowTopRightOnSquareIcon className="w-4 h-4 flex-shrink-0" />
+            <ArrowTopRightOnSquareIcon style={{ width: '14px', height: '14px' }} />
             GitHub
           </a>
           <Link
             href={`/portfolio/${encodeURIComponent(repo.name)}`}
-            className="px-3 py-2 border rounded-lg text-sm dark:border-gray-700 inline-flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors whitespace-nowrap"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '7px 14px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-sm)',
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-xs)',
+              letterSpacing: 'var(--tracking-wide)',
+              textTransform: 'uppercase',
+              color: 'var(--color-text-secondary)',
+              textDecoration: 'none',
+              transition: 'border-color 0.2s ease, color 0.2s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'var(--color-border-hover)'
+              e.currentTarget.style.color = 'var(--color-text-primary)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--color-border)'
+              e.currentTarget.style.color = 'var(--color-text-secondary)'
+            }}
           >
-            <InformationCircleIcon className="w-4 h-4 flex-shrink-0" />
-            Details
+            <InformationCircleIcon style={{ width: '14px', height: '14px' }} />
+            Detalhes
           </Link>
           {repo.homepage !== null && repo.homepage !== undefined && repo.homepage !== '' && (
             <a
               href={repo.homepage}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm inline-flex items-center gap-2 hover:bg-blue-700 transition-colors whitespace-nowrap"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '7px 14px',
+                backgroundColor: 'var(--color-accent-primary)',
+                border: '1px solid var(--color-accent-primary)',
+                borderRadius: 'var(--radius-sm)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                letterSpacing: 'var(--tracking-wide)',
+                textTransform: 'uppercase',
+                color: '#0A0A0A',
+                textDecoration: 'none',
+                fontWeight: 600,
+                transition: 'opacity 0.2s ease'
+              }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
             >
-              Live Demo
+              Live
             </a>
           )}
         </div>

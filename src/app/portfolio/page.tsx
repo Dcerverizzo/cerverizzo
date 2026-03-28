@@ -12,27 +12,55 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://cerverizzo.dev/')
 }
 
-// Featured projects - add repo names here to highlight them
 const FEATURED_REPOS = ['cerverizzo']
 
 export default async function PortfolioHome () {
   const repos = await fetchRepos()
 
   return (
-    <div className="w-full min-h-screen">
-      <div className="m-auto max-w-6xl p-6">
-        <Nav />
+    <div style={{ backgroundColor: 'var(--color-bg-base)', minHeight: '100vh' }}>
+      <Nav />
 
-        <header className="mt-8 mb-6">
-          <h1 className="text-3xl font-bold mb-2">Portfolio</h1>
-          <p className="text-neutral-600 dark:text-neutral-400">
-            A collection of projects showcasing my work in software development
-          </p>
-        </header>
+      <div style={{ paddingTop: '72px' }}>
+        <section className="container-editorial section-padding">
+          {/* Page Header */}
+          <header style={{ marginBottom: 'var(--space-16)' }}>
+            <span style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-xs)',
+              letterSpacing: 'var(--tracking-widest)',
+              textTransform: 'uppercase',
+              color: 'var(--color-accent-primary)'
+            }}>
+              Projetos
+            </span>
+            <h1 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-3xl)',
+              fontWeight: 800,
+              color: 'var(--color-text-primary)',
+              letterSpacing: 'var(--tracking-tight)',
+              marginTop: 'var(--space-3)',
+              lineHeight: 'var(--leading-tight)'
+            }}>
+              Portfolio
+            </h1>
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-text-secondary)',
+              marginTop: 'var(--space-4)',
+              maxWidth: '540px',
+              lineHeight: 'var(--leading-body)'
+            }}>
+              Uma coleção de projetos que demonstram meu trabalho em desenvolvimento de software.
+            </p>
+          </header>
 
-        <main>
-          <PortfolioFilters repos={repos} featuredRepos={FEATURED_REPOS} />
-        </main>
+          <main>
+            <PortfolioFilters repos={repos} featuredRepos={FEATURED_REPOS} />
+          </main>
+        </section>
       </div>
     </div>
   )

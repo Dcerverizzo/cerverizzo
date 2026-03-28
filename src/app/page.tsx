@@ -1,31 +1,38 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Nav from './components/Nav'
-import About from './components/About'
-import RecentPosts from './components/RecentPosts'
-import Follow from './components/Follow'
-import React from 'react'
+import HeroSection from './components/HeroSection'
+import AboutSection from './components/AboutSection'
+import ServicesSection from './components/ServicesSection'
+import ProjectsSection from './components/ProjectsSection'
+import StackSection from './components/StackSection'
+import ExperienceSection from './components/ExperienceSection'
+import ContactSection from './components/ContactSection'
+import SiteFooter from './components/SiteFooter'
+import CustomCursor from './components/CustomCursor'
+import ScrollReveal from './components/ScrollReveal'
 import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: {
-    template: 'Daniel Cerverizzo | Software Engineer',
-    default: 'Daniel Cerverizzo | Software Engineer'
-  },
-  description: 'Software Engineer Full Stack',
+  title: 'Daniel Cerverizzo | Software Engineer',
+  description: 'Software Engineer Full Stack com mais de 8 anos de experiência. Sites personalizados, consultoria de tecnologia e produtos digitais de alto impacto.',
   metadataBase: new URL('https://cerverizzo.dev/')
 }
 
 export default function Home () {
   return (
-    <div className='flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 dark:bg-black'>
+    <>
       <Nav />
-      <section>
-        <About />
-        <RecentPosts limit={3} />
-        <figure><embed src="https://wakatime.com/share/@dancerverizzo/a380e2ba-c745-4643-9327-b037e162853b.svg"
-        className='flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0'></embed></figure>
-        <Follow />
-      </section>
-    </div>
+      <CustomCursor />
+      <ScrollReveal />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <ProjectsSection />
+        <StackSection />
+        <ExperienceSection />
+        <ContactSection />
+      </main>
+      <SiteFooter />
+    </>
   )
 }

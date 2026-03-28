@@ -31,92 +31,209 @@ const experience = [
 
 export default function ResumePage () {
   return (
-    <div className="w-full min-h-screen">
-      <div className="m-auto max-w-6xl p-6">
-        <Nav />
+    <div style={{ backgroundColor: 'var(--color-bg-base)', minHeight: '100vh' }}>
+      <Nav />
 
-        <header className="mt-8 mb-6">
-          <h1 className="text-3xl font-bold mb-2">Currículo</h1>
-          <p className="text-neutral-600 dark:text-neutral-400">
-            Software Engineer Full Stack
-          </p>
-        </header>
+      <div style={{ paddingTop: '72px' }}>
+        <section className="container-editorial section-padding">
+          {/* Page Header */}
+          <header style={{ marginBottom: 'var(--space-16)' }}>
+            <span style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-xs)',
+              letterSpacing: 'var(--tracking-widest)',
+              textTransform: 'uppercase',
+              color: 'var(--color-accent-primary)'
+            }}>
+              Experiência
+            </span>
+            <h1 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-3xl)',
+              fontWeight: 800,
+              color: 'var(--color-text-primary)',
+              letterSpacing: 'var(--tracking-tight)',
+              marginTop: 'var(--space-3)',
+              lineHeight: 'var(--leading-tight)'
+            }}>
+              Currículo
+            </h1>
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-base)',
+              color: 'var(--color-text-secondary)',
+              marginTop: 'var(--space-4)',
+              maxWidth: '540px',
+              lineHeight: 'var(--leading-body)'
+            }}>
+              Software Engineer Full Stack com mais de 8 anos de experiência.
+            </p>
+          </header>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-3 mb-8">
-          <a
-            href={DRIVE_PDF_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <ArrowTopRightOnSquareIcon className="w-5 h-5" />
-            Open in Google Drive
-          </a>
-          <a
-            href={DRIVE_PDF_URL.replace('/view?usp=sharing', '/export?format=pdf')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-          >
-            <DocumentArrowDownIcon className="w-5 h-5" />
-            Download PDF
-          </a>
-        </div>
-
-        {/* Skills Section */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">Skills</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {skills.map((skillGroup) => (
-              <div key={skillGroup.category} className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow">
-                <h3 className="font-semibold text-sm text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
-                  {skillGroup.category}
-                </h3>
-                <ul className="space-y-1">
-                  {skillGroup.items.map((skill) => (
-                    <li key={skill} className="text-sm text-neutral-700 dark:text-neutral-300">
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* Action Buttons */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginBottom: 'var(--space-16)' }}>
+            <a href={DRIVE_PDF_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <ArrowTopRightOnSquareIcon style={{ width: '16px', height: '16px' }} />
+              Abrir no Google Drive
+            </a>
+            <a
+              href={DRIVE_PDF_URL.replace('/view?usp=sharing', '/export?format=pdf')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost"
+            >
+              <DocumentArrowDownIcon style={{ width: '16px', height: '16px' }} />
+              Download PDF
+            </a>
           </div>
-        </section>
 
-        {/* Experience Timeline */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">Experience</h2>
-          <div className="space-y-4">
-            {experience.map((exp, index) => (
-              <div
-                key={index}
-                className="relative pl-6 border-l-2 border-blue-500 bg-white dark:bg-gray-900 rounded-r-xl p-4 shadow"
-              >
-                <div className="absolute -left-2 top-6 w-4 h-4 bg-blue-500 rounded-full"></div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                  <h3 className="font-semibold text-lg">{exp.role}</h3>
-                  <span className="text-sm text-neutral-500 dark:text-neutral-400">{exp.period}</span>
+          {/* Skills Section */}
+          <section style={{ marginBottom: 'var(--space-16)' }}>
+            <h2 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-xl)',
+              fontWeight: 700,
+              color: 'var(--color-text-primary)',
+              marginBottom: 'var(--space-8)'
+            }}>
+              Skills
+            </h2>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+              gap: 'var(--space-4)'
+            }}>
+              {skills.map((skillGroup) => (
+                <div
+                  key={skillGroup.category}
+                  style={{
+                    backgroundColor: 'var(--color-bg-elevated)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: 'var(--space-6)'
+                  }}
+                >
+                  <h3 style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'var(--text-xs)',
+                    letterSpacing: 'var(--tracking-widest)',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-accent-primary)',
+                    marginBottom: 'var(--space-4)'
+                  }}>
+                    {skillGroup.category}
+                  </h3>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                    {skillGroup.items.map((skill) => (
+                      <li key={skill} style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: 'var(--text-sm)',
+                        color: 'var(--color-text-secondary)'
+                      }}>
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-blue-600 dark:text-blue-400 text-sm mb-2">{exp.company}</p>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm">{exp.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
 
-        {/* Embedded PDF */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">Full Resume</h2>
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow overflow-hidden">
-            <iframe
-              src={DRIVE_EMBED_URL}
-              className="w-full h-[600px] md:h-[800px]"
-              allow="autoplay"
-              title="Resume PDF"
-            />
-          </div>
+          {/* Experience Timeline */}
+          <section style={{ marginBottom: 'var(--space-16)' }}>
+            <h2 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-xl)',
+              fontWeight: 700,
+              color: 'var(--color-text-primary)',
+              marginBottom: 'var(--space-8)'
+            }}>
+              Experiência
+            </h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+              {experience.map((exp, index) => (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: 'var(--color-bg-elevated)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: 'var(--space-6)'
+                  }}
+                >
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                    gap: 'var(--space-2)',
+                    marginBottom: 'var(--space-2)'
+                  }}>
+                    <h3 style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'var(--text-base)',
+                      fontWeight: 700,
+                      color: 'var(--color-text-primary)',
+                      margin: 0
+                    }}>
+                      {exp.role}
+                    </h3>
+                    <span style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 'var(--text-xs)',
+                      letterSpacing: 'var(--tracking-wide)',
+                      color: 'var(--color-text-muted)'
+                    }}>
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'var(--text-sm)',
+                    color: 'var(--color-accent-primary)',
+                    marginBottom: 'var(--space-3)'
+                  }}>
+                    {exp.company}
+                  </p>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'var(--text-sm)',
+                    color: 'var(--color-text-secondary)',
+                    lineHeight: 'var(--leading-body)',
+                    margin: 0
+                  }}>
+                    {exp.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Embedded PDF */}
+          <section style={{ marginBottom: 'var(--space-16)' }}>
+            <h2 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-xl)',
+              fontWeight: 700,
+              color: 'var(--color-text-primary)',
+              marginBottom: 'var(--space-8)'
+            }}>
+              Currículo completo
+            </h2>
+            <div style={{
+              backgroundColor: 'var(--color-bg-elevated)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden'
+            }}>
+              <iframe
+                src={DRIVE_EMBED_URL}
+                style={{ width: '100%', height: '800px', display: 'block', border: 'none' }}
+                allow="autoplay"
+                title="Resume PDF"
+              />
+            </div>
+          </section>
         </section>
       </div>
     </div>

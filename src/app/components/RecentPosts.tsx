@@ -7,55 +7,73 @@ const RecentPosts = async ({ limit }: { limit?: number }): Promise<JSX.Element> 
   const postsToDisplay = (typeof limit === 'number' && !isNaN(limit)) ? recentPosts.slice(0, limit) : recentPosts
 
   return (
-    <div className="my-8 flex flex-col space-y-4 w-full">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
       {postsToDisplay.map((post) => (
         <Link
           key={post.id}
           href={`/blog/${post.slug}`}
-          className="group border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+          className="card-editorial"
+          style={{ textDecoration: 'none', display: 'block' }}
         >
           {/* Cover Image */}
           {post.cover_image !== null && post.cover_image !== '' && (
-            <div className="h-32 overflow-hidden">
+            <div style={{ height: '160px', overflow: 'hidden' }}>
               <img
                 src={post.cover_image}
                 alt={post.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transition: 'transform 0.4s ease'
+                }}
               />
             </div>
           )}
 
-          <div className="p-4">
+          <div style={{ padding: 'var(--space-6)' }}>
             {/* Title */}
-            <h3 className="font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <h3 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-lg)',
+              fontWeight: 700,
+              color: 'var(--color-text-primary)',
+              margin: 0,
+              lineHeight: 'var(--leading-tight)'
+            }}>
               {post.title}
             </h3>
 
-            {/* Meta info */}
-            <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+            {/* Meta */}
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              gap: 'var(--space-4)',
+              marginTop: 'var(--space-3)',
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-xs)',
+              letterSpacing: 'var(--tracking-wide)',
+              color: 'var(--color-text-muted)'
+            }}>
               <span>{new Date(post.created_at).toLocaleDateString('pt-BR')}</span>
 
-              <span className="flex items-center gap-1">
-                <ClockIcon className="w-4 h-4" />
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <ClockIcon style={{ width: '14px', height: '14px' }} />
                 {post.reading_time_minutes} min
               </span>
 
-              <span className="flex items-center gap-1">
-                <ChatBubbleLeftIcon className="w-4 h-4" />
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <ChatBubbleLeftIcon style={{ width: '14px', height: '14px' }} />
                 {post.comments_count}
               </span>
             </div>
 
             {/* Tags */}
             {Array.isArray(post.tag_list) && post.tag_list.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-3">
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', marginTop: 'var(--space-4)' }}>
                 {post.tag_list.slice(0, 4).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs px-2 py-1 rounded-full bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300"
-                  >
-                    #{tag}
-                  </span>
+                  <span key={tag} className="tag-editorial">#{tag}</span>
                 ))}
               </div>
             )}
