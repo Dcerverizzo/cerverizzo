@@ -66,7 +66,7 @@ export default function ResumePage () {
               maxWidth: '540px',
               lineHeight: 'var(--leading-body)'
             }}>
-              Software Engineer Full Stack com mais de 8 anos de experiência.
+              Software Engineer Full Stack com mais de 10 anos de experiência.
             </p>
           </header>
 

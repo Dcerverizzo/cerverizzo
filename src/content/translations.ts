@@ -11,7 +11,7 @@ export const translations = {
     },
     hero: {
       available: '[ Disponível para projetos ]',
-      subtitle: 'Software Engineer Full Stack com mais de 8 anos construindo interfaces e produtos digitais de alto impacto.',
+      subtitle: 'Software Engineer Full Stack com mais de 10 anos construindo interfaces e produtos digitais de alto impacto.',
       cta_primary: 'Ver Projetos',
       cta_secondary: 'Entre em Contato',
       scroll: 'scroll'
@@ -19,10 +19,10 @@ export const translations = {
     about: {
       index: '01',
       heading: 'Sobre mim',
-      p1: 'Sou um Engenheiro de Software Full Stack com mais de 8 anos de experiência na construção de interfaces e aplicações web de alto desempenho.',
+      p1: 'Sou um Engenheiro de Software Full Stack com mais de 10 anos de experiência na construção de interfaces e aplicações web de alto desempenho.',
       p2: 'Atualmente atuo como Software Development Engineer na Cobre Fácil, especializado na construção de componentes UX/UI com JavaScript, React, Next.js, TypeScript e Node.js. Também ofereço serviços de desenvolvimento de sites personalizados e consultoria de tecnologia online.',
       stats: [
-        { number: '8+', label: 'Anos de exp.' },
+        { number: '10+', label: 'Anos de exp.' },
         { number: '50+', label: 'Projetos' },
         { number: '10+', label: 'Tecnologias' },
         { number: '3', label: 'Países' }
@@ -143,7 +143,7 @@ export const translations = {
     },
     hero: {
       available: '[ Available for projects ]',
-      subtitle: 'Full Stack Software Engineer with 8+ years building high-impact interfaces and digital products.',
+      subtitle: 'Full Stack Software Engineer with 10+ years building high-impact interfaces and digital products.',
       cta_primary: 'View Projects',
       cta_secondary: 'Get in Touch',
       scroll: 'scroll'
@@ -151,10 +151,10 @@ export const translations = {
     about: {
       index: '01',
       heading: 'About me',
-      p1: 'I am a Full Stack Software Engineer with over 8 years of experience building high-performance interfaces and web applications.',
+      p1: 'I am a Full Stack Software Engineer with over 10 years of experience building high-performance interfaces and web applications.',
       p2: 'I currently work as a Software Development Engineer at Cobre Fácil, specializing in UX/UI components with JavaScript, React, Next.js, TypeScript, and Node.js. I also offer custom website development and online technology consulting.',
       stats: [
-        { number: '8+', label: 'Years of exp.' },
+        { number: '10+', label: 'Years of exp.' },
         { number: '50+', label: 'Projects' },
         { number: '10+', label: 'Technologies' },
         { number: '3', label: 'Countries' }

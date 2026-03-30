@@ -14,7 +14,7 @@ import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Daniel Cerverizzo | Software Engineer',
-  description: 'Software Engineer Full Stack com mais de 8 anos de experiência. Sites personalizados, consultoria de tecnologia e produtos digitais de alto impacto.',
+  description: 'Software Engineer Full Stack com mais de 10 anos de experiência. Sites personalizados, consultoria de tecnologia e produtos digitais de alto impacto.',
   metadataBase: new URL('https://cerverizzo.dev/')
 }
 
