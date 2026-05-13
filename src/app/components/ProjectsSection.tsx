@@ -5,6 +5,14 @@ import Link from 'next/link'
 import { useTranslation } from '@/contexts/LanguageContext'
 import type { Repo } from '@/lib/github/types'
 
+const workHighlight = {
+  title: 'Design Engineer — Casos com resultado',
+  description: 'Product decisions. Design execution. Measured results.',
+  metric: '3',
+  metricLabel: 'case studies',
+  href: '/work'
+}
+
 const langColor: Record<string, string> = {
   TypeScript: '#3178c6',
   JavaScript: '#f7df1e',
@@ -58,6 +66,97 @@ export default function ProjectsSection ({ repos }: Props) {
             {t.projects.heading}
           </h2>
         </div>
+
+        {/* Work / Case Studies highlight */}
+        <Link
+          href={workHighlight.href}
+          className="reveal"
+          style={{
+            display: 'block',
+            textDecoration: 'none',
+            backgroundColor: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-accent-line)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '32px 40px',
+            marginBottom: '24px',
+            transition: 'background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-bg-elevated)'
+            e.currentTarget.style.borderColor = 'var(--color-accent-primary)'
+            e.currentTarget.style.transform = 'translateY(-2px)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-bg-surface)'
+            e.currentTarget.style.borderColor = 'var(--color-accent-line)'
+            e.currentTarget.style.transform = 'translateY(0)'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+            <div>
+              <span className="tag-accent" style={{ marginBottom: '12px', display: 'inline-block' }}>
+                Work
+              </span>
+              <h3 style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-xl)',
+                fontWeight: 700,
+                color: 'var(--color-text-primary)',
+                letterSpacing: 'var(--tracking-tight)',
+                margin: '0 0 8px'
+              }}>
+                {workHighlight.title}
+              </h3>
+              <p style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-base)',
+                fontWeight: 300,
+                color: 'var(--color-text-secondary)',
+                lineHeight: 'var(--leading-body)',
+                margin: 0
+              }}>
+                {workHighlight.description}
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+              <div style={{ textAlign: 'center' }}>
+                <span style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'var(--text-2xl)',
+                  fontWeight: 800,
+                  color: 'var(--color-accent-primary)',
+                  display: 'block',
+                  lineHeight: 1
+                }}>
+                  {workHighlight.metric}
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-xs)',
+                  letterSpacing: 'var(--tracking-wide)',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-text-muted)',
+                  display: 'block',
+                  marginTop: '4px'
+                }}>
+                  {workHighlight.metricLabel}
+                </span>
+              </div>
+              <span style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                letterSpacing: 'var(--tracking-widest)',
+                textTransform: 'uppercase',
+                color: 'var(--color-accent-primary)',
+                border: '1px solid var(--color-accent-line)',
+                padding: '8px 18px',
+                borderRadius: 'var(--radius-sm)'
+              }}>
+                Ver cases →
+              </span>
+            </div>
+          </div>
+        </Link>
 
         {/* Featured project */}
         <div

@@ -117,12 +117,46 @@ export const translations = {
         }
       ]
     },
-    contact: {
+    blog_section: {
       index: '06',
+      heading: 'Do Blog',
+      subtitle: 'Reflexões e aprendizados sobre desenvolvimento, design e tecnologia.',
+      cta: 'Ver todos os artigos →'
+    },
+    contact: {
+      index: '07',
       heading_line1: 'Vamos construir algo',
       heading_line2: 'extraordinário.',
       cta_email: 'Enviar mensagem',
       cta_linkedin: 'LinkedIn →'
+    },
+    work: {
+      section_label: '03 — Work',
+      heading: 'Case Studies',
+      subtitle: 'Decisões de produto. Execução de design. Resultados mensuráveis.',
+      view_case: 'Ver case study →',
+      back_home: '← Voltar ao início',
+      view_cases: 'Ver cases →'
+    },
+    case_study: {
+      problem_label: 'O Problema',
+      problem_heading: 'Identificando o problema real',
+      decision_label: 'A Decisão',
+      decision_heading: 'O raciocínio de produto',
+      execution_label: 'A Execução',
+      execution_heading: 'Da decisão à implementação',
+      result_label: 'O Resultado',
+      stack_label: 'Stack Usada',
+      role_label: 'Meu Papel',
+      period_label: 'Período',
+      link_label: 'Link',
+      company_label: 'Empresa',
+      result_meta_label: 'Resultado',
+      prev_label: '← Anterior',
+      next_label: 'Próximo →',
+      cta_question: 'Gostou do processo?',
+      cta_heading: 'Vamos trabalhar juntos.',
+      cta_button: 'Entrar em contato'
     },
     footer: {
       tagline: 'Software Engineer Full Stack. Sites personalizados e consultoria de tecnologia online.',
@@ -249,12 +283,46 @@ export const translations = {
         }
       ]
     },
-    contact: {
+    blog_section: {
       index: '06',
+      heading: 'From the Blog',
+      subtitle: 'Thoughts and learnings on software development, design, and technology.',
+      cta: 'View all posts →'
+    },
+    contact: {
+      index: '07',
       heading_line1: "Let's build something",
       heading_line2: 'extraordinary.',
       cta_email: 'Send message',
       cta_linkedin: 'LinkedIn →'
+    },
+    work: {
+      section_label: '03 — Work',
+      heading: 'Case Studies',
+      subtitle: 'Product decisions. Design execution. Measured results.',
+      view_case: 'View case study →',
+      back_home: '← Back to home',
+      view_cases: 'View cases →'
+    },
+    case_study: {
+      problem_label: 'The Problem',
+      problem_heading: 'Identifying the real problem',
+      decision_label: 'The Decision',
+      decision_heading: 'Product reasoning',
+      execution_label: 'The Execution',
+      execution_heading: 'From decision to implementation',
+      result_label: 'The Result',
+      stack_label: 'Stack Used',
+      role_label: 'My Role',
+      period_label: 'Period',
+      link_label: 'Link',
+      company_label: 'Company',
+      result_meta_label: 'Result',
+      prev_label: '← Previous',
+      next_label: 'Next →',
+      cta_question: 'Liked the process?',
+      cta_heading: "Let's work together.",
+      cta_button: 'Get in touch'
     },
     footer: {
       tagline: 'Full Stack Software Engineer. Custom websites and online technology consulting.',

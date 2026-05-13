@@ -15,6 +15,7 @@ export default function Nav () {
 
   const links = [
     { href: '/', label: t.nav.home },
+    { href: '/work', label: 'Work' },
     { href: '/portfolio', label: t.nav.portfolio },
     { href: '/blog', label: t.nav.blog },
     { href: '/resume', label: t.nav.resume }

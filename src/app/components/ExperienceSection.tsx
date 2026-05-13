@@ -57,9 +57,9 @@ export default function ExperienceSection () {
             }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
-              {timeline.map((item) => (
+              {timeline.map((item, index) => (
                 <div
-                  key={item.role + item.company}
+                  key={index}
                   className="reveal"
                   style={{ paddingLeft: '32px', position: 'relative' }}
                 >

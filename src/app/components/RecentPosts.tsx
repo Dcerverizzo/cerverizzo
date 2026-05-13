@@ -2,12 +2,14 @@ import Link from 'next/link'
 import { fetchPosts } from '../../lib/devto/fetch'
 import { ChatBubbleLeftIcon, ClockIcon } from '@heroicons/react/24/outline'
 
-const RecentPosts = async ({ limit }: { limit?: number }): Promise<JSX.Element> => {
+const RecentPosts = async ({ limit, grid }: { limit?: number, grid?: boolean }): Promise<JSX.Element> => {
   const recentPosts = await fetchPosts()
   const postsToDisplay = (typeof limit === 'number' && !isNaN(limit)) ? recentPosts.slice(0, limit) : recentPosts
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+    <div style={grid === true
+      ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-6)' }
+      : { display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
       {postsToDisplay.map((post) => (
         <Link
           key={post.id}

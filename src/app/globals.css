@@ -426,6 +426,53 @@ body::before {
   box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 }
 
+/* Work cards */
+.work-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.work-card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 10, 10, 0);
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+}
+
+.work-card:hover .work-card-overlay {
+  background-color: rgba(10, 10, 10, 0.45);
+}
+
+/* Work card CTA link with animated underline */
+.work-card-link {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+.work-card-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent-primary);
+  transition: width 0.3s ease;
+}
+
+.work-card:hover .work-card-link::after {
+  width: 100%;
+}
+
 /*new css */
 /*!***************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/css/style.css ***!

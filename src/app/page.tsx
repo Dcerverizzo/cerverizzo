@@ -5,6 +5,8 @@ import ServicesSection from './components/ServicesSection'
 import ProjectsSection from './components/ProjectsSection'
 import StackSection from './components/StackSection'
 import ExperienceSection from './components/ExperienceSection'
+import BlogSection from './components/BlogSection'
+import RecentPosts from './components/RecentPosts'
 import ContactSection from './components/ContactSection'
 import SiteFooter from './components/SiteFooter'
 import CustomCursor from './components/CustomCursor'
@@ -33,6 +35,9 @@ export default async function Home () {
         <ProjectsSection repos={repos} />
         <StackSection />
         <ExperienceSection />
+        <BlogSection>
+          <RecentPosts limit={3} grid />
+        </BlogSection>
         <ContactSection />
       </main>
       <SiteFooter />
