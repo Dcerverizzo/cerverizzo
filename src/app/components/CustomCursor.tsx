@@ -2,29 +2,29 @@
 
 import { useEffect, useRef } from 'react'
 
+// Decorative ring that trails the pointer. The native cursor stays visible
+// (precision for text and forms), and the effect is skipped on touch devices
+// and for users who prefer reduced motion.
 export default function CustomCursor () {
-  const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Only enable on non-touch devices
-    if ('ontouchstart' in window) return
+    const finePointer = window.matchMedia('(pointer: fine)').matches
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!finePointer || reducedMotion) return
 
-    const dot = dotRef.current
     const ring = ringRef.current
-    if (dot === null || ring === null) return
+    if (ring === null) return
 
-    let mouseX = 0
-    let mouseY = 0
-    let ringX = 0
-    let ringY = 0
+    let mouseX = -100
+    let mouseY = -100
+    let ringX = -100
+    let ringY = -100
     let animId: number
 
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
       mouseY = e.clientY
-      dot.style.left = `${mouseX}px`
-      dot.style.top = `${mouseY}px`
     }
 
     const animate = () => {
@@ -35,37 +35,24 @@ export default function CustomCursor () {
       animId = requestAnimationFrame(animate)
     }
 
-    const onMouseEnterInteractive = () => { ring.classList.add('hovering') }
-    const onMouseLeaveInteractive = () => { ring.classList.remove('hovering') }
+    // Delegated, so links rendered after mount (language switch, filters) also react
+    const onMouseOver = (e: MouseEvent) => {
+      const interactive = (e.target as Element).closest('a, button, [role="button"], select, input, textarea')
+      ring.classList.toggle('hovering', interactive !== null)
+    }
 
     window.addEventListener('mousemove', onMouseMove, { passive: true })
+    document.addEventListener('mouseover', onMouseOver, { passive: true })
     animId = requestAnimationFrame(animate)
-
-    const interactives = document.querySelectorAll('a, button, [role="button"]')
-    interactives.forEach((el) => {
-      el.addEventListener('mouseenter', onMouseEnterInteractive)
-      el.addEventListener('mouseleave', onMouseLeaveInteractive)
-    })
-
-    dot.style.display = 'block'
     ring.style.display = 'block'
-    document.body.style.cursor = 'none'
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseover', onMouseOver)
       cancelAnimationFrame(animId)
-      interactives.forEach((el) => {
-        el.removeEventListener('mouseenter', onMouseEnterInteractive)
-        el.removeEventListener('mouseleave', onMouseLeaveInteractive)
-      })
-      document.body.style.cursor = ''
+      ring.style.display = 'none'
     }
   }, [])
 
-  return (
-    <>
-      <div ref={dotRef} className="cursor-dot" style={{ display: 'none' }} aria-hidden="true" />
-      <div ref={ringRef} className="cursor-ring" style={{ display: 'none' }} aria-hidden="true" />
-    </>
-  )
+  return <div ref={ringRef} className="cursor-ring" style={{ display: 'none' }} aria-hidden="true" />
 }

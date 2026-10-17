@@ -2,76 +2,85 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { ArrowTopRightOnSquareIcon, InformationCircleIcon, MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline'
+import { ArrowTopRightOnSquareIcon, MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/24/solid'
-import type { Repo } from '@/lib/github/types'
+import { useTranslation } from '@/contexts/LanguageContext'
+import { repoDescription, repoTitle, type Repo } from '@/lib/github/types'
+import ProjectCover from './ProjectCover'
 
 interface PortfolioFiltersProps {
   repos: Repo[]
   featuredRepos?: string[]
 }
 
-type SortOption = 'stars' | 'date-desc' | 'date-asc' | 'name'
+type SortOption = 'relevance' | 'date-desc' | 'date-asc' | 'name'
 
-const languageColors: Record<string, string> = {
-  TypeScript: '#3178C6',
-  JavaScript: '#F7DF1E',
-  Python: '#3572A5',
-  PHP: '#777BB4',
-  Ruby: '#CC342D',
-  Shell: '#89E051'
+const iconStyle = {
+  position: 'absolute' as const,
+  left: '12px',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  width: '16px',
+  height: '16px',
+  color: 'var(--color-text-muted)',
+  pointerEvents: 'none' as const
+}
+
+const sectionHeading = {
+  fontFamily: 'var(--font-display)',
+  fontSize: 'var(--text-lg)',
+  fontWeight: 700,
+  color: 'var(--color-text-primary)',
+  marginBottom: 'var(--space-6)',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px'
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default function PortfolioFilters ({ repos, featuredRepos = [] }: PortfolioFiltersProps) {
+  const { t, lang } = useTranslation()
   const [search, setSearch] = useState('')
   const [selectedLanguage, setSelectedLanguage] = useState<string>('all')
-  const [sortBy, setSortBy] = useState<SortOption>('stars')
+  const [sortBy, setSortBy] = useState<SortOption>('relevance')
 
   const languages = useMemo(() => {
     const langs = new Set<string>()
     repos.forEach(repo => {
-      if (repo.language !== null && repo.language !== undefined && repo.language !== '') {
-        langs.add(repo.language)
-      }
+      if (repo.language != null && repo.language !== '') langs.add(repo.language)
     })
     return Array.from(langs).sort()
   }, [repos])
 
   const filteredRepos = useMemo(() => {
-    let result = repos.filter(repo => {
-      const searchLower = search.toLowerCase()
-      const nameMatches = repo.name.toLowerCase().includes(searchLower)
-      const descMatches = repo.description !== null && repo.description !== undefined
-        ? repo.description.toLowerCase().includes(searchLower)
-        : false
-      const topicsMatch = repo.topics !== undefined && repo.topics !== null
-        ? repo.topics.some(t => t.toLowerCase().includes(searchLower))
-        : false
+    const searchLower = search.toLowerCase()
+    const result = repos.filter(repo => {
+      const haystack = [
+        repoTitle(repo),
+        repoDescription(repo, lang) ?? '',
+        ...(repo.topics ?? [])
+      ].join(' ').toLowerCase()
 
-      const matchesSearch = search === '' || nameMatches || descMatches || topicsMatch
+      const matchesSearch = search === '' || haystack.includes(searchLower)
       const matchesLanguage = selectedLanguage === 'all' || repo.language === selectedLanguage
-
       return matchesSearch && matchesLanguage
     })
 
-    result = [...result].sort((a, b) => {
+    // 'relevance' keeps the curated order from the data source
+    if (sortBy === 'relevance') return result
+    return [...result].sort((a, b) => {
       switch (sortBy) {
-        case 'stars':
-          return (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
         case 'date-desc':
           return new Date(b.created_at ?? 0).getTime() - new Date(a.created_at ?? 0).getTime()
         case 'date-asc':
           return new Date(a.created_at ?? 0).getTime() - new Date(b.created_at ?? 0).getTime()
         case 'name':
-          return a.name.localeCompare(b.name)
+          return repoTitle(a).localeCompare(repoTitle(b))
         default:
           return 0
       }
     })
-
-    return result
-  }, [repos, search, selectedLanguage, sortBy])
+  }, [repos, search, selectedLanguage, sortBy, lang])
 
   const featured = filteredRepos.filter(r => featuredRepos.includes(r.name))
   const regular = filteredRepos.filter(r => !featuredRepos.includes(r.name))
@@ -85,97 +94,62 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
         gap: 'var(--space-3)',
         marginBottom: 'var(--space-8)'
       }}>
-        {/* Search */}
         <div style={{ position: 'relative', flex: '1 1 220px' }}>
-          <MagnifyingGlassIcon style={{
-            position: 'absolute',
-            left: '12px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '16px',
-            height: '16px',
-            color: 'var(--color-text-muted)'
-          }} />
+          <MagnifyingGlassIcon style={iconStyle} aria-hidden="true" />
           <input
-            type="text"
-            placeholder="Buscar projetos..."
+            type="search"
+            aria-label={t.projects.search_label}
+            placeholder={t.projects.search_placeholder}
             value={search}
             onChange={(e) => { setSearch(e.target.value) }}
             className="input-editorial"
-            style={{ paddingLeft: '36px' }}
+            style={{ paddingLeft: '36px', width: '100%' }}
           />
         </div>
 
-        {/* Language Filter */}
         <div style={{ position: 'relative' }}>
-          <FunnelIcon style={{
-            position: 'absolute',
-            left: '12px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '16px',
-            height: '16px',
-            color: 'var(--color-text-muted)',
-            pointerEvents: 'none'
-          }} />
+          <FunnelIcon style={iconStyle} aria-hidden="true" />
           <select
+            aria-label={t.projects.language_label}
             value={selectedLanguage}
             onChange={(e) => { setSelectedLanguage(e.target.value) }}
             className="select-editorial"
             style={{ paddingLeft: '36px', paddingRight: '32px' }}
           >
-            <option value="all">Todas as linguagens</option>
-            {languages.map(lang => (
-              <option key={lang} value={lang}>{lang}</option>
+            <option value="all">{t.projects.all_languages}</option>
+            {languages.map(language => (
+              <option key={language} value={language}>{language}</option>
             ))}
           </select>
         </div>
 
-        {/* Sort */}
         <select
+          aria-label={t.projects.sort_label}
           value={sortBy}
           onChange={(e) => { setSortBy(e.target.value as SortOption) }}
           className="select-editorial"
           style={{ paddingRight: '32px' }}
         >
-          <option value="stars">Mais estrelas</option>
-          <option value="date-desc">Mais recentes</option>
-          <option value="date-asc">Mais antigos</option>
-          <option value="name">Alfabético</option>
+          <option value="relevance">{t.projects.sort_relevance}</option>
+          <option value="date-desc">{t.projects.sort_newest}</option>
+          <option value="date-asc">{t.projects.sort_oldest}</option>
+          <option value="name">{t.projects.sort_name}</option>
         </select>
       </div>
 
-      {/* Results count */}
-      <p style={{
-        fontFamily: 'var(--font-body)',
-        fontSize: 'var(--text-xs)',
-        letterSpacing: 'var(--tracking-widest)',
-        textTransform: 'uppercase',
-        color: 'var(--color-text-muted)',
-        marginBottom: 'var(--space-8)'
-      }}>
-        {filteredRepos.length} de {repos.length} projetos
+      <p className="eyebrow" aria-live="polite" style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-8)' }}>
+        {t.projects.results(filteredRepos.length)}
       </p>
 
-      {/* Featured Section */}
       {featured.length > 0 && (
         <section style={{ marginBottom: 'var(--space-16)' }}>
-          <h2 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'var(--text-lg)',
-            fontWeight: 700,
-            color: 'var(--color-text-primary)',
-            marginBottom: 'var(--space-6)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}>
-            <StarIcon style={{ width: '18px', height: '18px', color: 'var(--color-accent-primary)' }} />
-            Destaque
+          <h2 style={sectionHeading}>
+            <StarIcon style={{ width: '18px', height: '18px', color: 'var(--color-accent-primary)' }} aria-hidden="true" />
+            {t.projects.featured}
           </h2>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
             gap: 'var(--space-6)'
           }}>
             {featured.map((repo) => (
@@ -185,18 +159,9 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
         </section>
       )}
 
-      {/* All Projects */}
       <section>
-        {featured.length > 0 && (
-          <h2 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'var(--text-lg)',
-            fontWeight: 700,
-            color: 'var(--color-text-primary)',
-            marginBottom: 'var(--space-6)'
-          }}>
-            Todos os projetos
-          </h2>
+        {featured.length > 0 && regular.length > 0 && (
+          <h2 style={sectionHeading}>{t.projects.all_projects}</h2>
         )}
         {filteredRepos.length === 0
           ? (
@@ -206,27 +171,21 @@ export default function PortfolioFilters ({ repos, featuredRepos = [] }: Portfol
             color: 'var(--color-text-muted)',
             fontFamily: 'var(--font-body)'
           }}>
-            <p>Nenhum projeto encontrado.</p>
+            <p>{t.projects.empty}</p>
             <button
+              type="button"
               onClick={() => { setSearch(''); setSelectedLanguage('all') }}
-              style={{
-                marginTop: 'var(--space-3)',
-                color: 'var(--color-accent-primary)',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: 'var(--font-body)',
-                fontSize: 'var(--text-sm)'
-              }}
+              className="btn-ghost-sm"
+              style={{ marginTop: 'var(--space-3)', cursor: 'pointer' }}
             >
-              Limpar filtros
+              {t.projects.clear_filters}
             </button>
           </div>
             )
           : (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
             gap: 'var(--space-6)'
           }}>
             {regular.map((repo) => (
@@ -245,76 +204,33 @@ interface ProjectCardProps {
 }
 
 function ProjectCard ({ repo, featured = false }: ProjectCardProps): JSX.Element {
-  const langColor = languageColors[repo.language ?? ''] ?? '#5A5550'
+  const { t, lang } = useTranslation()
+  const year = repo.created_at != null ? new Date(repo.created_at).getFullYear() : null
+  const detailHref = repo.caseStudy != null
+    ? `/work/${repo.caseStudy}`
+    : `/portfolio/${encodeURIComponent(repo.name)}`
 
   return (
     <article className="card-editorial" style={{
+      display: 'flex',
+      flexDirection: 'column',
       outline: featured ? '1px solid var(--color-accent-line)' : 'none'
     }}>
-      {/* Cover */}
-      <div style={{
-        position: 'relative',
-        height: '140px',
-        background: 'linear-gradient(135deg, var(--color-bg-subtle) 0%, var(--color-bg-elevated) 100%)',
-        overflow: 'hidden'
-      }}>
-        <img
-          src="/images/code.jpg"
-          alt="code"
-          style={{
-            objectFit: 'cover',
-            width: '100%',
-            height: '100%',
-            opacity: 0.3
-          }}
-        />
-        {featured && (
-          <div style={{
-            position: 'absolute',
-            top: '12px',
-            right: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            backgroundColor: 'var(--color-accent-primary)',
-            color: '#0A0A0A',
-            padding: '4px 10px',
-            borderRadius: 'var(--radius-full)',
-            fontSize: 'var(--text-xs)',
-            fontFamily: 'var(--font-body)',
-            fontWeight: 600,
-            letterSpacing: 'var(--tracking-wide)'
-          }}>
-            <StarIcon style={{ width: '10px', height: '10px' }} />
-            Destaque
-          </div>
-        )}
+      <div style={{ position: 'relative', height: featured ? '200px' : '150px', backgroundColor: 'var(--color-bg-subtle)' }}>
+        <ProjectCover repo={repo} sizes="(max-width: 768px) 100vw, 33vw" />
       </div>
 
-      {/* Body */}
-      <div style={{ padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-        {/* Language badge */}
-        <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--text-xs)',
-          letterSpacing: 'var(--tracking-widest)',
-          textTransform: 'uppercase',
-          color: 'var(--color-text-muted)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px'
-        }}>
-          <span style={{
-            display: 'inline-block',
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: langColor
-          }} />
-          {repo.language ?? 'Project'}
-        </p>
+      <div style={{ padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', flex: 1 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', alignItems: 'center' }}>
+          {repo.language != null && <span className="tag-editorial">{repo.language}</span>}
+          {repo.status != null && <span className="tag-accent">{t.projects.status[repo.status]}</span>}
+          {year != null && (
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)' }}>
+              {year}
+            </span>
+          )}
+        </div>
 
-        {/* Title */}
         <h3 style={{
           fontFamily: 'var(--font-display)',
           fontSize: 'var(--text-base)',
@@ -322,144 +238,41 @@ function ProjectCard ({ repo, featured = false }: ProjectCardProps): JSX.Element
           color: 'var(--color-text-primary)',
           margin: 0
         }}>
-          {repo.name}
+          {repoTitle(repo)}
         </h3>
 
-        {/* Description */}
         <p style={{
           fontFamily: 'var(--font-body)',
           fontSize: 'var(--text-sm)',
           color: 'var(--color-text-secondary)',
           lineHeight: 'var(--leading-body)',
+          margin: 0,
           display: '-webkit-box',
-          WebkitLineClamp: 2,
+          WebkitLineClamp: 3,
           WebkitBoxOrient: 'vertical',
           overflow: 'hidden'
         }}>
-          {repo.description ?? 'Um projeto de software com código e decisões de arquitetura.'}
+          {repoDescription(repo, lang)}
         </p>
 
-        {/* Stars + Date */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--text-xs)',
-          color: 'var(--color-text-muted)'
-        }}>
-          <span>⭐ {repo.stargazers_count}</span>
-          <span>
-            {repo.created_at != null
-              ? new Date(repo.created_at).toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric'
-              })
-              : '—'}
-          </span>
-        </div>
-
-        {/* Topics */}
-        {Array.isArray(repo.topics) && repo.topics.length > 0 && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
-            {repo.topics.slice(0, 4).map((topic) => (
-              <span key={topic} className="tag-editorial">#{topic}</span>
-            ))}
-            {repo.topics.length > 4 && (
-              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)' }}>
-                +{repo.topics.length - 4}
-              </span>
-            )}
-          </div>
-        )}
-
-        {/* Actions */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', paddingTop: 'var(--space-2)' }}>
-          <a
-            href={repo.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '7px 14px',
-              border: '1px solid var(--color-border)',
-              borderRadius: 'var(--radius-sm)',
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-xs)',
-              letterSpacing: 'var(--tracking-wide)',
-              textTransform: 'uppercase',
-              color: 'var(--color-text-secondary)',
-              textDecoration: 'none',
-              transition: 'border-color 0.2s ease, color 0.2s ease'
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'var(--color-border-hover)'
-              e.currentTarget.style.color = 'var(--color-text-primary)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'var(--color-border)'
-              e.currentTarget.style.color = 'var(--color-text-secondary)'
-            }}
-          >
-            <ArrowTopRightOnSquareIcon style={{ width: '14px', height: '14px' }} />
-            GitHub
-          </a>
-          <Link
-            href={`/portfolio/${encodeURIComponent(repo.name)}`}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '7px 14px',
-              border: '1px solid var(--color-border)',
-              borderRadius: 'var(--radius-sm)',
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-xs)',
-              letterSpacing: 'var(--tracking-wide)',
-              textTransform: 'uppercase',
-              color: 'var(--color-text-secondary)',
-              textDecoration: 'none',
-              transition: 'border-color 0.2s ease, color 0.2s ease'
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'var(--color-border-hover)'
-              e.currentTarget.style.color = 'var(--color-text-primary)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'var(--color-border)'
-              e.currentTarget.style.color = 'var(--color-text-secondary)'
-            }}
-          >
-            <InformationCircleIcon style={{ width: '14px', height: '14px' }} />
-            Detalhes
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', paddingTop: 'var(--space-2)', marginTop: 'auto' }}>
+          <Link href={detailHref} className="btn-ghost-sm">
+            {repo.caseStudy != null ? t.projects.view_case : t.projects.details}
           </Link>
-          {repo.homepage !== null && repo.homepage !== undefined && repo.homepage !== '' && (
-            <a
-              href={repo.homepage}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '7px 14px',
-                backgroundColor: 'var(--color-accent-primary)',
-                border: '1px solid var(--color-accent-primary)',
-                borderRadius: 'var(--radius-sm)',
-                fontFamily: 'var(--font-body)',
-                fontSize: 'var(--text-xs)',
-                letterSpacing: 'var(--tracking-wide)',
-                textTransform: 'uppercase',
-                color: '#0A0A0A',
-                textDecoration: 'none',
-                fontWeight: 600,
-                transition: 'opacity 0.2s ease'
-              }}
-              onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
-              onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
-            >
+          {repo.html_url != null
+            ? (
+            <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="btn-ghost-sm">
+              <ArrowTopRightOnSquareIcon style={{ width: '14px', height: '14px' }} aria-hidden="true" />
+              GitHub
+            </a>
+              )
+            : (
+            <span style={{ alignSelf: 'center', fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)' }}>
+              {t.projects.source_private}
+            </span>
+              )}
+          {repo.homepage != null && repo.homepage !== '' && (
+            <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '7px 14px' }}>
               Live
             </a>
           )}

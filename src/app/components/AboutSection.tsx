@@ -66,22 +66,9 @@ export default function AboutSection () {
             </p>
 
             {/* Stats */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              borderTop: '1px solid var(--color-border)',
-              paddingTop: '32px',
-              gap: '0'
-            }}>
-              {stats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  style={{
-                    paddingRight: '16px',
-                    borderRight: index < stats.length - 1 ? '1px solid var(--color-border)' : 'none',
-                    paddingLeft: index > 0 ? '16px' : '0'
-                  }}
-                >
+            <div className="stats-grid">
+              {stats.map((stat) => (
+                <div key={stat.label} className="stats-item">
                   <div style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 'var(--text-2xl)',

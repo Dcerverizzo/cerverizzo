@@ -140,7 +140,8 @@ function ServiceCard ({ service, cta }: { service: ServiceItem; cta: string }) {
       {/* Title */}
       <h3 style={{
         fontFamily: 'var(--font-display)',
-        fontSize: 'var(--text-xl)',
+        // Syne is wide; long PT words ("Desenvolvimento") must fit a 4-column row
+        fontSize: 'var(--text-lg)',
         fontWeight: 700,
         color: 'var(--color-text-primary)',
         lineHeight: 'var(--leading-tight)',

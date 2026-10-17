@@ -22,7 +22,7 @@ export default function HeroSection () {
       <div style={{ position: 'absolute', inset: 0 }}>
         <Image
           src="/images/myself.JPG"
-          alt="Daniel Cerverizzo"
+          alt=""
           fill
           priority
           sizes="100vw"
@@ -83,45 +83,10 @@ export default function HeroSection () {
           className="hero-buttons"
           style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}
         >
-          <Link
-            href="/portfolio"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              padding: '14px 32px',
-              backgroundColor: 'var(--color-accent-primary)',
-              color: 'var(--color-bg-base)',
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-xs)',
-              fontWeight: 600,
-              letterSpacing: 'var(--tracking-widest)',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              borderRadius: 'var(--radius-sm)',
-              transition: 'opacity 0.2s ease'
-            }}
-          >
+          <Link href="/work" className="btn-primary" style={{ padding: '14px 32px' }}>
             {t.hero.cta_primary}
           </Link>
-          <a
-            href="#contact"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              padding: '14px 32px',
-              backgroundColor: 'transparent',
-              color: 'var(--color-text-primary)',
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-xs)',
-              fontWeight: 400,
-              letterSpacing: 'var(--tracking-widest)',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              border: '1px solid var(--color-border-hover)',
-              borderRadius: 'var(--radius-sm)',
-              transition: 'border-color 0.2s ease'
-            }}
-          >
+          <a href="#contact" className="btn-ghost" style={{ padding: '14px 32px', color: 'var(--color-text-primary)', borderColor: 'var(--color-border-hover)' }}>
             {t.hero.cta_secondary}
           </a>
         </div>
@@ -130,6 +95,7 @@ export default function HeroSection () {
       {/* Scroll indicator — bottom right */}
       <div
         className="hidden md:flex"
+        aria-hidden="true"
         style={{
           position: 'absolute',
           bottom: '40px',

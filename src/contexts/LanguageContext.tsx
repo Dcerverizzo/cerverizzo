@@ -17,15 +17,21 @@ export function LanguageProvider ({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>('pt')
 
   useEffect(() => {
-    const saved = localStorage.getItem('portfolio-lang') as Lang | null
+    let saved: Lang | null = null
+    try { saved = localStorage.getItem('portfolio-lang') as Lang | null } catch {}
     const detected = navigator.language.startsWith('pt') ? 'pt' : 'en'
     setLang(saved ?? detected)
   }, [])
 
+  // Keep <html lang> in sync so screen readers and search engines get the right language
+  useEffect(() => {
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'
+  }, [lang])
+
   const toggleLang = () => {
     setLang(prev => {
       const next: Lang = prev === 'pt' ? 'en' : 'pt'
-      localStorage.setItem('portfolio-lang', next)
+      try { localStorage.setItem('portfolio-lang', next) } catch {}
       return next
     })
   }

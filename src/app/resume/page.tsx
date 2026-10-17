@@ -22,10 +22,22 @@ const skills = [
 
 const experience = [
   {
-    role: 'Software Engineer',
-    company: 'Current Position',
-    period: 'Present',
-    description: 'Full-stack development with modern technologies'
+    role: 'Software Development Engineer',
+    company: 'Cobre Fácil',
+    period: '2020 — Presente',
+    description: 'Componentes de UX/UI com React, Next.js e TypeScript, APIs com Node.js e o redesign do checkout que aumentou em 22% a conversão de pagamentos.'
+  },
+  {
+    role: 'Front End Engineer',
+    company: 'Didáctica',
+    period: '2018 — 2020',
+    description: 'Redesign mobile-first da plataforma de webinars, com queda de 45% nos casos de abandono e problemas de acesso pelo celular.'
+  },
+  {
+    role: 'Desenvolvedor Web',
+    company: 'Agências & CLT',
+    period: '2016 — 2018',
+    description: 'Front-end com HTML, CSS, JavaScript e PHP, e-commerces e landing pages de alta conversão.'
   }
 ]
 

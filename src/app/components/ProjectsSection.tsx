@@ -1,37 +1,27 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslation } from '@/contexts/LanguageContext'
-import type { Repo } from '@/lib/github/types'
-
-const workHighlight = {
-  title: 'Design Engineer — Casos com resultado',
-  description: 'Product decisions. Design execution. Measured results.',
-  metric: '3',
-  metricLabel: 'case studies',
-  href: '/work'
-}
-
-const langColor: Record<string, string> = {
-  TypeScript: '#3178c6',
-  JavaScript: '#f7df1e',
-  Python: '#3572A5',
-  PHP: '#4F5D95',
-  Ruby: '#CC342D',
-  Shell: '#89e051'
-}
+import { repoDescription, repoTitle, type Repo } from '@/lib/github/types'
+import { caseStudies } from '@/app/work/data'
+import ProjectCover from './ProjectCover'
 
 interface Props {
   repos: Repo[]
 }
 
-export default function ProjectsSection ({ repos }: Props) {
+function StatusTag ({ repo }: { repo: Repo }) {
   const { t } = useTranslation()
+  if (repo.status == null) return null
+  return <span className="tag-editorial">{t.projects.status[repo.status]}</span>
+}
+
+export default function ProjectsSection ({ repos }: Props) {
+  const { t, lang } = useTranslation()
   const featured = repos[0]
   const others = repos.slice(1, 5)
 
-  if (repos.length === 0) return null
+  if (featured == null) return null
 
   return (
     <section
@@ -44,15 +34,7 @@ export default function ProjectsSection ({ repos }: Props) {
         <div style={{ marginBottom: '64px' }} className="reveal">
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
             <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--color-accent-primary)' }} />
-            <span style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-xs)',
-              letterSpacing: 'var(--tracking-widest)',
-              textTransform: 'uppercase',
-              color: 'var(--color-accent-primary)'
-            }}>
-              {t.projects.index}
-            </span>
+            <span className="eyebrow">{t.projects.index}</span>
           </div>
           <h2 style={{
             fontFamily: 'var(--font-display)',
@@ -68,30 +50,7 @@ export default function ProjectsSection ({ repos }: Props) {
         </div>
 
         {/* Work / Case Studies highlight */}
-        <Link
-          href={workHighlight.href}
-          className="reveal"
-          style={{
-            display: 'block',
-            textDecoration: 'none',
-            backgroundColor: 'var(--color-bg-surface)',
-            border: '1px solid var(--color-accent-line)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '32px 40px',
-            marginBottom: '24px',
-            transition: 'background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-bg-elevated)'
-            e.currentTarget.style.borderColor = 'var(--color-accent-primary)'
-            e.currentTarget.style.transform = 'translateY(-2px)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-bg-surface)'
-            e.currentTarget.style.borderColor = 'var(--color-accent-line)'
-            e.currentTarget.style.transform = 'translateY(0)'
-          }}
-        >
+        <Link href="/work" className="reveal work-highlight">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
             <div>
               <span className="tag-accent" style={{ marginBottom: '12px', display: 'inline-block' }}>
@@ -105,17 +64,16 @@ export default function ProjectsSection ({ repos }: Props) {
                 letterSpacing: 'var(--tracking-tight)',
                 margin: '0 0 8px'
               }}>
-                {workHighlight.title}
+                {t.projects.work_title}
               </h3>
               <p style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 'var(--text-base)',
-                fontWeight: 300,
                 color: 'var(--color-text-secondary)',
                 lineHeight: 'var(--leading-body)',
                 margin: 0
               }}>
-                {workHighlight.description}
+                {t.projects.work_desc}
               </p>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
@@ -128,68 +86,32 @@ export default function ProjectsSection ({ repos }: Props) {
                   display: 'block',
                   lineHeight: 1
                 }}>
-                  {workHighlight.metric}
+                  {caseStudies.length}
                 </span>
-                <span style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'var(--text-xs)',
-                  letterSpacing: 'var(--tracking-wide)',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-text-muted)',
-                  display: 'block',
-                  marginTop: '4px'
-                }}>
-                  {workHighlight.metricLabel}
+                <span className="eyebrow" style={{ color: 'var(--color-text-muted)', display: 'block', marginTop: '4px' }}>
+                  {t.projects.work_metric_label}
                 </span>
               </div>
-              <span style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 'var(--text-xs)',
-                letterSpacing: 'var(--tracking-widest)',
-                textTransform: 'uppercase',
-                color: 'var(--color-accent-primary)',
-                border: '1px solid var(--color-accent-line)',
-                padding: '8px 18px',
-                borderRadius: 'var(--radius-sm)'
-              }}>
-                Ver cases →
-              </span>
+              <span className="btn-outline-sm">{t.work.view_cases}</span>
             </div>
           </div>
         </Link>
 
         {/* Featured project */}
-        <div
+        <article
           className="reveal"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
             backgroundColor: 'var(--color-bg-surface)',
             borderRadius: 'var(--radius-lg)',
             overflow: 'hidden',
-            marginBottom: '2px',
-            minHeight: '320px',
+            marginBottom: '16px',
             border: '1px solid var(--color-border)'
           }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-5" style={{ minHeight: '320px' }}>
-            {/* Image */}
-            <div className="md:col-span-3" style={{ position: 'relative', minHeight: '240px' }}>
-              <Image
-                src="/images/code.jpg"
-                alt={featured.name}
-                fill
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, 60vw"
-                style={{ objectFit: 'cover' }}
-              />
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(to right, transparent 50%, var(--color-bg-surface) 100%)'
-              }} />
+          <div className="grid grid-cols-1 md:grid-cols-5" style={{ minHeight: '360px' }}>
+            <div className="md:col-span-3" style={{ position: 'relative', minHeight: '260px', backgroundColor: 'var(--color-bg-elevated)' }}>
+              <ProjectCover repo={featured} sizes="(max-width: 768px) 100vw, 60vw" />
             </div>
-            {/* Content */}
             <div
               className="md:col-span-2"
               style={{
@@ -202,9 +124,7 @@ export default function ProjectsSection ({ repos }: Props) {
             >
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 <span className="tag-accent">{featured.language ?? 'Web'}</span>
-                {featured.topics?.slice(0, 2).map((topic) => (
-                  <span key={topic} className="tag-editorial">{topic}</span>
-                ))}
+                <StatusTag repo={featured} />
               </div>
               <h3 style={{
                 fontFamily: 'var(--font-display)',
@@ -213,180 +133,93 @@ export default function ProjectsSection ({ repos }: Props) {
                 color: 'var(--color-text-primary)',
                 margin: 0
               }}>
-                {featured.name}
+                {repoTitle(featured)}
               </h3>
               <p style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 'var(--text-base)',
-                fontWeight: 300,
                 color: 'var(--color-text-secondary)',
                 lineHeight: 'var(--leading-body)',
                 margin: 0
               }}>
-                {featured.description}
+                {repoDescription(featured, lang)}
               </p>
-              <div style={{ display: 'flex', gap: '16px', marginTop: '8px' }}>
-                <a
-                  href={featured.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: 'var(--text-xs)',
-                    letterSpacing: 'var(--tracking-widest)',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-accent-primary)',
-                    textDecoration: 'none',
-                    border: '1px solid var(--color-accent-line)',
-                    padding: '8px 16px',
-                    borderRadius: 'var(--radius-sm)'
-                  }}
-                >
-                  {t.projects.github}
-                </a>
-                {(featured.homepage != null && featured.homepage !== '') && (
-                  <a
-                    href={featured.homepage ?? '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontFamily: 'var(--font-body)',
-                      fontSize: 'var(--text-xs)',
-                      letterSpacing: 'var(--tracking-widest)',
-                      textTransform: 'uppercase',
-                      color: 'var(--color-text-secondary)',
-                      textDecoration: 'none',
-                      border: '1px solid var(--color-border-hover)',
-                      padding: '8px 16px',
-                      borderRadius: 'var(--radius-sm)'
-                    }}
-                  >
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginTop: '8px' }}>
+                {featured.caseStudy != null && (
+                  <Link href={`/work/${featured.caseStudy}`} className="btn-primary">
+                    {t.projects.view_case}
+                  </Link>
+                )}
+                {featured.html_url != null && (
+                  <a href={featured.html_url} target="_blank" rel="noopener noreferrer" className="btn-outline-sm">
+                    {t.projects.github}
+                  </a>
+                )}
+                {featured.homepage != null && featured.homepage !== '' && (
+                  <a href={featured.homepage} target="_blank" rel="noopener noreferrer" className="btn-outline-sm">
                     {t.projects.live}
                   </a>
                 )}
               </div>
             </div>
           </div>
-        </div>
+        </article>
 
         {/* Other projects grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '16px',
             marginBottom: '48px'
           }}
         >
-          {others.map((repo) => (
-            <div
-              key={repo.name}
-              className="reveal project-card"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderRadius: 'var(--radius-md)',
-                overflow: 'hidden',
-                border: '1px solid var(--color-border)',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-              }}
-            >
-              {/* Card image */}
-              <div style={{ position: 'relative', height: '160px' }}>
-                <Image
-                  src="/images/code.jpg"
-                  alt={repo.name}
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  style={{ objectFit: 'cover' }}
-                />
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(to bottom, transparent 40%, rgba(10,10,10,0.8) 100%)',
-                  opacity: 0,
-                  transition: 'opacity 0.3s ease'
-                }} />
-                {(repo.language != null && repo.language !== '') && (
-                  <span
-                    className="tag-editorial"
-                    style={{
-                      position: 'absolute',
-                      top: '12px',
-                      left: '12px',
-                      borderColor: langColor[repo.language ?? ''] ?? 'var(--color-border-hover)',
-                      color: langColor[repo.language ?? ''] ?? 'var(--color-text-secondary)'
-                    }}
-                  >
-                    {repo.language}
-                  </span>
-                )}
-              </div>
-              {/* Card content */}
-              <div style={{ padding: '20px' }}>
-                <h3 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'var(--text-base)',
-                  fontWeight: 700,
-                  color: 'var(--color-text-primary)',
-                  margin: '0 0 8px'
-                }}>
-                  {repo.name}
-                </h3>
-                <p style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'var(--text-sm)',
-                  fontWeight: 300,
-                  color: 'var(--color-text-muted)',
-                  lineHeight: 'var(--leading-body)',
-                  margin: '0 0 16px',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden'
-                }}>
-                  {repo.description}
-                </p>
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
+          {others.map((repo) => {
+            const href = repo.caseStudy != null
+              ? `/work/${repo.caseStudy}`
+              : `/portfolio/${encodeURIComponent(repo.name)}`
+            return (
+              <article key={repo.name} className="reveal project-card">
+                <div style={{ position: 'relative', height: '160px', backgroundColor: 'var(--color-bg-elevated)' }}>
+                  <ProjectCover repo={repo} sizes="(max-width: 768px) 100vw, 25vw" />
+                </div>
+                <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    {repo.language != null && <span className="tag-editorial">{repo.language}</span>}
+                    <StatusTag repo={repo} />
+                  </div>
+                  <h3 style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'var(--text-base)',
+                    fontWeight: 700,
+                    color: 'var(--color-text-primary)',
+                    margin: 0
+                  }}>
+                    {/* Stretched link: the whole card is clickable */}
+                    <Link href={href} className="stretched-link">{repoTitle(repo)}</Link>
+                  </h3>
+                  <p style={{
                     fontFamily: 'var(--font-body)',
-                    fontSize: 'var(--text-xs)',
-                    letterSpacing: 'var(--tracking-widest)',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-accent-primary)',
-                    textDecoration: 'none'
-                  }}
-                >
-                  {t.projects.github}
-                </a>
-              </div>
-            </div>
-          ))}
+                    fontSize: 'var(--text-sm)',
+                    color: 'var(--color-text-secondary)',
+                    lineHeight: 'var(--leading-body)',
+                    margin: 0,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden'
+                  }}>
+                    {repoDescription(repo, lang)}
+                  </p>
+                </div>
+              </article>
+            )
+          })}
         </div>
 
         {/* CTA */}
         <div className="reveal" style={{ textAlign: 'center' }}>
-          <Link
-            href="/portfolio"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              padding: '14px 40px',
-              backgroundColor: 'transparent',
-              color: 'var(--color-text-primary)',
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-xs)',
-              letterSpacing: 'var(--tracking-widest)',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              border: '1px solid var(--color-border-hover)',
-              borderRadius: 'var(--radius-sm)',
-              transition: 'border-color 0.2s ease'
-            }}
-          >
+          <Link href="/portfolio" className="btn-ghost">
             {t.projects.cta}
           </Link>
         </div>

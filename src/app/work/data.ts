@@ -48,10 +48,82 @@ export function localized (cs: CaseStudy, lang: Lang) {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: 'treino-app',
+    category: 'Produto Próprio / Mobile PWA',
+    company: 'Projeto próprio',
+    period: 'Set 2026 – Presente',
+    role: 'Produto, Design e Engenharia',
+    stack: ['Next.js 16', 'TypeScript', 'tRPC', 'Drizzle ORM', 'MySQL', 'PWA'],
+    resultMetric: '38',
+    resultText: {
+      pt: 'Treinos finalizados nas primeiras três semanas, por 8 pessoas que testam o app. Musculação virou rotina. Corrida quase não apareceu — e esse é o próximo problema a resolver.',
+      en: 'Workouts completed in the first three weeks by 8 people testing the app. Strength training became routine. Running barely showed up — and that is the next problem to solve.'
+    },
+    title: 'App de Treino — Força e Corrida',
+    tagline: {
+      pt: 'Eu treinava com uma planilha e corria com outro app. O corpo era um só, os dados não.',
+      en: 'I trained with a spreadsheet and ran with another app. One body, two disconnected datasets.'
+    },
+    problem: {
+      pt: [
+        'Desde 2018 eu anoto meus treinos. Primeiro no Obsidian, depois numa planilha de Excel com série, repetição e carga. Funcionava, mas era como dirigir olhando só pelo retrovisor: eu sabia o que tinha feito, nunca o que fazer a seguir.',
+        'A corrida morava em outro lugar. O relógio mandava para o Strava, o Strava guardava os dados e nenhum dos dois sabia que eu tinha feito agachamento pesado no dia anterior.',
+        'Testei os apps do mercado. Eles resolviam bem o planejamento, mas o histórico ficava fraco ou atrás de paywall. E nenhum respondia à pergunta que eu fazia toda manhã: o que eu treino hoje sem atropelar o que treinei ontem?'
+      ],
+      en: [
+        'I have been logging my workouts since 2018. First in Obsidian, then in an Excel spreadsheet with sets, reps and load. It worked, but it was like driving while looking only at the rear-view mirror: I knew what I had done, never what to do next.',
+        'Running lived somewhere else. My watch synced to Strava, Strava kept the data, and neither knew I had done heavy squats the day before.',
+        'I tried the apps on the market. They handled planning well, but history was weak or behind a paywall. And none of them answered the question I asked every morning: what do I train today without running over what I trained yesterday?'
+      ]
+    },
+    decision: {
+      pt: [
+        'A primeira decisão foi o que o app não seria. Não seria uma biblioteca com mil exercícios e vídeo. O centro seria o registro real do que aconteceu e a leitura disso ao longo do tempo.',
+        'Para unir força e corrida, escolhi uma linguagem visual que os dois entendem: o corpo. Um boneco que fica vermelho nos músculos treinados e esfria com o tempo. A regra é simples — até 3 séries, o músculo esfria em 3 dias; de 4 a 6, em 5 dias; 7 ou mais, em 7 dias. A corrida marca as pernas, sempre com intensidade menor que a musculação. Carga ficou de fora do cálculo: 60 kg no supino e 60 kg no leg press não dizem a mesma coisa.',
+        'O Strava não entrega o VO2máx do relógio. Em vez de depender de uma integração que não existe, o app calcula pela fórmula VDOT do Jack Daniels a partir do melhor pace recente, e aceita o valor do relógio se eu quiser corrigir.',
+        'A decisão que mais mudou o produto veio depois, treinando com ele. Na academia, com a respiração alta, tinha informação demais na tela. Separei o antes do durante: uma tela para preparar o treino e um Modo Treino no estilo player — uma série por vez, números grandes, um botão Feito e o descanso correndo em anel.'
+      ],
+      en: [
+        'The first decision was what the app would not be. It would not be a library with a thousand exercises and videos. The core would be the real record of what happened and how to read it over time.',
+        'To unite strength and running, I chose a visual language both understand: the body. A figure that turns red on the muscles you trained and cools down over time. The rule is simple — up to 3 sets, the muscle cools in 3 days; 4 to 6, in 5 days; 7 or more, in 7 days. Running marks the legs, always at a lower intensity than lifting. Load was left out of the formula: 60 kg on the bench press and 60 kg on the leg press do not mean the same thing.',
+        'Strava does not expose the VO2max from the watch. Instead of depending on an integration that does not exist, the app estimates it with Jack Daniels\' VDOT formula from the best recent pace, and accepts the watch value as an override.',
+        'The decision that changed the product the most came later, while training with it. At the gym, out of breath, there was too much on the screen. I split before from during: one screen to prepare the workout and a player-style Workout Mode — one set at a time, big numbers, a Done button and rest time running in a ring.'
+      ]
+    },
+    execution: {
+      pt: [
+        'Next.js 16 com tRPC e Drizzle sobre MySQL, publicado como PWA para instalar na tela inicial do iPhone. Sem app nativo: a velocidade de publicar uma correção no mesmo dia valia mais que as APIs que eu perderia.',
+        'Os bugs mais importantes só apareceram no celular, dentro da academia. O iOS dava zoom em qualquer campo com fonte menor que 16px. O Safari suspendia o áudio do alarme de descanso depois de alguns segundos parado — o teste automatizado pulava o descanso e nunca pegou isso. E a Vercel roda em UTC: um treino feito às 23h caía no dia seguinte no calendário.',
+        'O sinal ruim da academia virou decisão de arquitetura. Antes, uma série registrada sem conexão sumia da tela. Agora ela fica numa fila no aparelho e sobe sozinha quando o sinal volta. Como o registro de série já era idempotente, enviar duas vezes não duplica nada.',
+        'Depois que amigos pediram para usar, o app ganhou contas por convite, onboarding, painel de admin e métricas de uso — tudo lido com consultas agregadas, sem expor dado pessoal de ninguém.'
+      ],
+      en: [
+        'Next.js 16 with tRPC and Drizzle on MySQL, shipped as a PWA installed on the iPhone home screen. No native app: being able to ship a fix the same day was worth more than the APIs I would give up.',
+        'The most important bugs only showed up on a phone, inside the gym. iOS zoomed into any input with a font smaller than 16px. Safari suspended the rest-timer audio after a few idle seconds — the automated test skipped the rest period and never caught it. And Vercel runs in UTC: a workout logged at 11pm landed on the next day in the calendar.',
+        'Poor gym signal became an architecture decision. Before, a set logged without connection disappeared from the screen. Now it waits in an on-device queue and syncs on its own when the signal returns. Since set logging was already idempotent, sending twice never duplicates anything.',
+        'Once friends asked to use it, the app gained invite-only accounts, onboarding, an admin panel and usage metrics — all read through aggregated queries, without exposing anyone\'s personal data.'
+      ]
+    },
+    heroImage: {
+      src: '/work/treino-app/hero.webp',
+      alt: 'Três telas do app: resumo da semana, Modo Treino com supino e boneco com músculos treinados em vermelho'
+    },
+    executionImages: [
+      {
+        src: '/work/treino-app/modo-treino.webp',
+        alt: 'Modo Treino: uma série por vez, com sugestão de subir a carga e guia de execução do exercício'
+      },
+      {
+        src: '/work/treino-app/boneco-resumo.webp',
+        alt: 'Boneco com recuperação muscular e resumo do treino com recordes pessoais'
+      }
+    ]
+  },
+  {
     slug: 'shop-my-feed',
     category: 'E-commerce / Product Design',
     company: 'Shop My Feed',
-    period: '', // TODO: adicionar período
+    period: '',
     role: 'Design Engineer (Freelance)',
     stack: ['React', 'TypeScript', 'Figma', 'CSS3'],
     resultMetric: 'UX nativo',
@@ -97,23 +169,19 @@ export const caseStudies: CaseStudy[] = [
       ]
     },
     heroImage: {
-      // SUBSTITUIR: /public/work/shop-my-feed/hero.jpg — tela principal do feed
       src: '/images/smf-feed1.png',
       alt: 'Shop My Feed — tela principal do feed'
     },
     executionImages: [
       {
-        // SUBSTITUIR: /public/work/shop-my-feed/outfit-view.jpg — flat lay com variantes
         src: '/images/smf-photo-profile.png',
         alt: 'Flat lay com variantes de outfit'
       },
       {
-        // SUBSTITUIR: /public/work/shop-my-feed/product-detail.jpg — detalhe do produto
         src: '/images/smf-photo.png',
         alt: 'Detalhe do produto'
       },
       {
-        // SUBSTITUIR: /public/work/shop-my-feed/checkout-cta.jpg — CTA fixo no bottom
         src: '/images/smf-product.png',
         alt: 'CTA fixo no bottom'
       }
@@ -167,22 +235,10 @@ export const caseStudies: CaseStudy[] = [
       ]
     },
     heroImage: {
-      // SUBSTITUIR: /public/work/webinar-mobile/hero.jpg
-      src: 'https://placehold.co/1200x480/111111/C8B89A',
-      alt: 'Webinar Mobile — Clickmob'
+      src: '/images/didactica_team.jpg',
+      alt: 'Time da Didáctica'
     },
-    executionImages: [
-      {
-        // SUBSTITUIR: /public/work/webinar-mobile/before.jpg — experiência anterior (desktop-first)
-        src: 'https://placehold.co/600x400/111111/C8B89A',
-        alt: 'Experiência anterior — desktop-first'
-      },
-      {
-        // SUBSTITUIR: /public/work/webinar-mobile/after.jpg — experiência redesenhada (mobile-first)
-        src: 'https://placehold.co/600x400/111111/C8B89A',
-        alt: 'Experiência redesenhada — mobile-first'
-      }
-    ]
+    executionImages: []
   },
   {
     slug: 'checkout-cobrefacil',
@@ -234,27 +290,18 @@ export const caseStudies: CaseStudy[] = [
       ]
     },
     heroImage: {
-      // SUBSTITUIR: /public/work/checkout-cobrefacil/hero.jpg
-      // Atenção: verificar política de NDA antes de publicar prints da plataforma
       src: '/images/hero.png',
       alt: 'Checkout — Cobre Fácil'
     },
     executionImages: [
       {
-        // SUBSTITUIR: /public/work/checkout-cobrefacil/cta-fixed.jpg — CTA fixo no bottom com preço visível
         src: '/images/checkout.png',
         alt: 'CTA fixo no bottom com preço visível'
       },
       {
-        // SUBSTITUIR: /public/work/checkout-cobrefacil/error-states.jpg — estados de erro específicos por campo
-        // Atenção: verificar política de NDA antes de publicar
         src: '/images/cta-fixed.png',
         alt: 'Estados de erro específicos por campo'
       }
-    ],
-    ndaNote: {
-      pt: 'Verificar política de NDA antes de publicar prints da plataforma.',
-      en: 'Check NDA policy before publishing platform screenshots.'
-    }
+    ]
   }
 ]

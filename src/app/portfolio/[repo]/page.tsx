@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { fetchRepos } from '@/lib/github/fetch'
+import { repoTitle, type Repo } from '@/lib/github/types'
 import Link from 'next/link'
 import Nav from '@/app/components/Nav'
 import { ArrowTopRightOnSquareIcon, ArrowLeftIcon } from '@heroicons/react/24/outline'
@@ -15,7 +16,20 @@ const languageColors: Record<string, string> = {
   Python: '#3572A5',
   PHP: '#777BB4',
   Ruby: '#CC342D',
-  Shell: '#89E051'
+  Shell: '#89E051',
+  Go: '#00ADD8',
+  Vue: '#41B883'
+}
+
+const statusLabel: Record<NonNullable<Repo['status']>, string> = {
+  production: 'Em produção',
+  development: 'Em desenvolvimento',
+  client: 'Projeto de cliente'
+}
+
+export async function generateStaticParams () {
+  const repos = await fetchRepos()
+  return repos.map(r => ({ repo: r.name }))
 }
 
 export default async function RepoPage ({ params }: Params) {
@@ -77,7 +91,7 @@ export default async function RepoPage ({ params }: Params) {
               lineHeight: 'var(--leading-tight)',
               margin: 0
             }}>
-              {repo.name}
+              {repoTitle(repo)}
             </h1>
 
             {repo.description != null && repo.description !== '' && (
@@ -105,25 +119,17 @@ export default async function RepoPage ({ params }: Params) {
             flexWrap: 'wrap',
             gap: 'var(--space-8)'
           }}>
-            {typeof repo.stargazers_count === 'number' && (
+            {repo.status != null && (
               <div>
-                <p style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'var(--text-xs)',
-                  letterSpacing: 'var(--tracking-widest)',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-text-muted)',
-                  marginBottom: 'var(--space-2)'
-                }}>
-                  Stars
+                <p className="eyebrow" style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-2)' }}>
+                  Status
                 </p>
                 <p style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-base)',
                   color: 'var(--color-accent-primary)'
                 }}>
-                  ⭐ {repo.stargazers_count}
+                  {statusLabel[repo.status]}
                 </p>
               </div>
             )}
@@ -174,10 +180,17 @@ export default async function RepoPage ({ params }: Params) {
 
           {/* Actions */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              <ArrowTopRightOnSquareIcon style={{ width: '16px', height: '16px' }} />
-              Abrir no GitHub
-            </a>
+            {repo.caseStudy != null && (
+              <Link href={`/work/${repo.caseStudy}`} className="btn-primary">
+                Ver case study
+              </Link>
+            )}
+            {repo.html_url != null && (
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={repo.caseStudy != null ? 'btn-ghost' : 'btn-primary'}>
+                <ArrowTopRightOnSquareIcon style={{ width: '16px', height: '16px' }} aria-hidden="true" />
+                Abrir no GitHub
+              </a>
+            )}
             {repo.homepage != null && repo.homepage !== '' && (
               <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="btn-ghost">
                 Visitar site

@@ -30,7 +30,7 @@ export default function ContactSection () {
         <div className="reveal" style={{ marginBottom: '64px' }}>
           <p style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'var(--text-3xl)',
+            fontSize: 'clamp(1.5rem, 5vw, var(--text-3xl))',
             fontWeight: 300,
             color: 'var(--color-text-secondary)',
             lineHeight: 'var(--leading-tight)',
@@ -41,7 +41,8 @@ export default function ContactSection () {
           </p>
           <h2 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'var(--text-hero)',
+            // Syne is wide: "extraordinário." must fit a 390px screen
+            fontSize: 'clamp(1.75rem, 7.5vw, 7rem)',
             fontWeight: 800,
             color: 'var(--color-text-primary)',
             lineHeight: 'var(--leading-tight)',

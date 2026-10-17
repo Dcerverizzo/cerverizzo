@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://cerverizzo.dev/')
 }
 
-const FEATURED_REPOS = ['cerverizzo']
+const FEATURED_REPOS = ['treino-app', 'scheduling-saas']
 
 export default async function PortfolioHome () {
   const repos = await fetchRepos()

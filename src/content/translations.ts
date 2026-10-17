@@ -12,7 +12,7 @@ export const translations = {
     hero: {
       available: '[ Disponível para projetos ]',
       subtitle: 'Software Engineer Full Stack com mais de 10 anos construindo interfaces e produtos digitais de alto impacto.',
-      cta_primary: 'Ver Projetos',
+      cta_primary: 'Ver Case Studies',
       cta_secondary: 'Entre em Contato',
       scroll: 'scroll'
     },
@@ -61,7 +61,32 @@ export const translations = {
       heading: 'Projetos Destacados',
       github: 'GitHub →',
       live: 'Ver Live →',
-      cta: 'Ver todos os projetos →'
+      cta: 'Ver todos os projetos →',
+      work_title: 'Case studies com resultado',
+      work_desc: 'Decisões de produto, execução de design e resultados medidos.',
+      work_metric_label: 'case studies',
+      view_case: 'Ver case study →',
+      details: 'Detalhes',
+      source_private: 'Código privado',
+      search_placeholder: 'Buscar projetos...',
+      search_label: 'Buscar projetos',
+      all_languages: 'Todas as linguagens',
+      language_label: 'Filtrar por linguagem',
+      sort_label: 'Ordenar',
+      sort_relevance: 'Relevância',
+      sort_newest: 'Mais recentes',
+      sort_oldest: 'Mais antigos',
+      sort_name: 'Nome (A–Z)',
+      featured: 'Destaque',
+      all_projects: 'Todos os projetos',
+      empty: 'Nenhum projeto encontrado.',
+      clear_filters: 'Limpar filtros',
+      results: (n: number) => n === 1 ? '1 projeto' : `${n} projetos`,
+      status: {
+        production: 'Em produção',
+        development: 'Em desenvolvimento',
+        client: 'Projeto de cliente'
+      }
     },
     stack: {
       index: '04',
@@ -85,7 +110,7 @@ export const translations = {
         {
           role: 'Software Development Engineer',
           company: 'Cobre Fácil',
-          period: '2022 — Presente',
+          period: '2020 — Presente',
           current: true,
           bullets: [
             'Desenvolvimento de componentes UX/UI com React, Next.js e TypeScript',
@@ -94,13 +119,13 @@ export const translations = {
           ]
         },
         {
-          role: 'Software Engineer Full Stack',
-          company: 'Projetos & Freelance',
-          period: '2018 — 2022',
+          role: 'Front End Engineer',
+          company: 'Didáctica',
+          period: '2018 — 2020',
           current: false,
           bullets: [
-            'Desenvolvimento de sites e sistemas personalizados para clientes nacionais e internacionais',
-            'Consultoria técnica para startups em fase de produto',
+            'Redesign mobile-first da plataforma de webinars, com queda de 45% nos casos de abandono',
+            'Sites e sistemas sob medida como freelancer, para clientes nacionais e internacionais',
             'Palestrante em eventos de tecnologia (SistemasBR, Didática Tech)'
           ]
         },
@@ -178,7 +203,7 @@ export const translations = {
     hero: {
       available: '[ Available for projects ]',
       subtitle: 'Full Stack Software Engineer with 10+ years building high-impact interfaces and digital products.',
-      cta_primary: 'View Projects',
+      cta_primary: 'View Case Studies',
       cta_secondary: 'Get in Touch',
       scroll: 'scroll'
     },
@@ -227,7 +252,32 @@ export const translations = {
       heading: 'Featured Projects',
       github: 'GitHub →',
       live: 'View Live →',
-      cta: 'View all projects →'
+      cta: 'View all projects →',
+      work_title: 'Case studies with results',
+      work_desc: 'Product decisions, design execution and measured results.',
+      work_metric_label: 'case studies',
+      view_case: 'View case study →',
+      details: 'Details',
+      source_private: 'Private source',
+      search_placeholder: 'Search projects...',
+      search_label: 'Search projects',
+      all_languages: 'All languages',
+      language_label: 'Filter by language',
+      sort_label: 'Sort',
+      sort_relevance: 'Relevance',
+      sort_newest: 'Newest',
+      sort_oldest: 'Oldest',
+      sort_name: 'Name (A–Z)',
+      featured: 'Featured',
+      all_projects: 'All projects',
+      empty: 'No projects found.',
+      clear_filters: 'Clear filters',
+      results: (n: number) => n === 1 ? '1 project' : `${n} projects`,
+      status: {
+        production: 'In production',
+        development: 'In development',
+        client: 'Client project'
+      }
     },
     stack: {
       index: '04',
@@ -251,7 +301,7 @@ export const translations = {
         {
           role: 'Software Development Engineer',
           company: 'Cobre Fácil',
-          period: '2022 — Present',
+          period: '2020 — Present',
           current: true,
           bullets: [
             'UX/UI component development with React, Next.js, and TypeScript',
@@ -260,13 +310,13 @@ export const translations = {
           ]
         },
         {
-          role: 'Full Stack Software Engineer',
-          company: 'Projects & Freelance',
-          period: '2018 — 2022',
+          role: 'Front End Engineer',
+          company: 'Didáctica',
+          period: '2018 — 2020',
           current: false,
           bullets: [
-            'Custom website and system development for national and international clients',
-            'Technical consulting for product-stage startups',
+            'Mobile-first redesign of the webinar platform, cutting abandonment cases by 45%',
+            'Custom websites and systems as a freelancer, for national and international clients',
             'Speaker at technology events (SistemasBR, Didática Tech)'
           ]
         },

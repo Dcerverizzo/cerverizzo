@@ -73,7 +73,6 @@ export default function WorkContent () {
             <div className="grid grid-cols-1 md:grid-cols-5" style={{ minHeight: '360px' }}>
               {/* Image col */}
               <div className="md:col-span-3" style={{ position: 'relative', minHeight: '280px' }}>
-                {/* SUBSTITUIR: /public/work/shop-my-feed/hero.jpg — tela principal do feed */}
                 <Image
                   src={featured.heroImage.src}
                   alt={featured.heroImage.alt}
@@ -177,7 +176,6 @@ export default function WorkContent () {
               >
                 {/* Card image */}
                 <div style={{ position: 'relative', height: '240px' }}>
-                  {/* SUBSTITUIR: trocar src pelo caminho real da imagem — ver comentários em data.ts */}
                   <Image
                     src={cs.heroImage.src}
                     alt={cs.heroImage.alt}

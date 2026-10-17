@@ -209,13 +209,14 @@ export default function CaseStudyContent ({ cs, prev, next }: Props) {
             className="reveal"
             style={{
               position: 'relative',
-              minHeight: '480px',
+              aspectRatio: '16 / 9',
+              maxHeight: '720px',
+              width: '100%',
               borderRadius: 'var(--radius-lg)',
               overflow: 'hidden',
               border: '1px solid var(--color-border)'
             }}
           >
-            {/* SUBSTITUIR: trocar src pelo caminho real da imagem hero do projeto */}
             <Image
               src={cs.heroImage.src}
               alt={cs.heroImage.alt}
@@ -261,6 +262,7 @@ export default function CaseStudyContent ({ cs, prev, next }: Props) {
                 ))}
 
                 {/* Execution images grid */}
+                {cs.executionImages.length > 0 && (
                 <div
                   className="grid grid-cols-1 md:grid-cols-2"
                   style={{ gap: '16px', marginTop: 'var(--space-8)' }}
@@ -276,7 +278,6 @@ export default function CaseStudyContent ({ cs, prev, next }: Props) {
                         border: '1px solid var(--color-border)'
                       }}
                     >
-                      {/* SUBSTITUIR: ver comentários em data.ts para o caminho real */}
                       <Image
                         src={img.src}
                         alt={img.alt}
@@ -289,6 +290,7 @@ export default function CaseStudyContent ({ cs, prev, next }: Props) {
                     </div>
                   ))}
                 </div>
+                )}
               </ContentBlock>
 
               {/* O Resultado / The Result */}
