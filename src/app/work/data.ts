@@ -120,6 +120,64 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
+    slug: 'alves-mansano',
+    category: 'Site de Cliente / Freela',
+    company: 'Alves & Mansano Gastronomia',
+    period: 'Abr 2026',
+    role: 'Design e Desenvolvimento (Freelance)',
+    stack: ['Next.js 16', 'React 19', 'TypeScript', 'CSS Modules', 'Formspree', 'Schema.org'],
+    resultMetric: '5 dias',
+    resultText: {
+      pt: 'Do primeiro commit ao site no ar. A empresa passou a ter onde mostrar o próprio trabalho, e os pedidos de proposta chegam por e-mail, já com o briefing do evento, ou pelo WhatsApp. A equipe responde pelo canal que o cliente escolheu.',
+      en: 'From first commit to live website. The business now has a place to show its work, and quote requests arrive by e-mail, already carrying the event brief, or via WhatsApp. The team replies on whichever channel the client chose.'
+    },
+    title: 'Alves & Mansano — Buffet e Catering',
+    tagline: {
+      pt: 'Todo orçamento de buffet começa com as mesmas perguntas. O site passou a fazer essas perguntas pelo cliente.',
+      en: 'Every catering quote starts with the same questions. The website now asks them for the client.'
+    },
+    problem: {
+      pt: [
+        'A Alves & Mansano faz buffet e catering para eventos em Araçatuba e região: casamentos, eventos corporativos, almoços, jantares, batizados. Mais de 20 anos de cozinha, e o primeiro contato com o cliente acontecia quase todo pelo WhatsApp.',
+        'O problema do WhatsApp é a conversa de ida e volta. Para dar um preço, o buffet precisa saber o tipo de evento, a data, o local, quantos convidados, que serviço a pessoa quer e se há restrição alimentar. Cada pergunta é uma mensagem, e cada mensagem é uma chance de o cliente esfriar.'
+      ],
+      en: [
+        'Alves & Mansano runs a buffet and catering business for events in Araçatuba, Brazil, and the surrounding region: weddings, corporate events, lunches, dinners, christenings. Over 20 years in the kitchen, and almost every first contact happened over WhatsApp.',
+        'The problem with WhatsApp is the back-and-forth. To quote a price, a caterer needs the event type, date, venue, guest count, the service wanted and any dietary restrictions. Each question is one more message, and each message is one more chance for the lead to go cold.'
+      ]
+    },
+    decision: {
+      pt: [
+        'Uma página só, com um objetivo só: pedir proposta. Apresentação, como eles trabalham, tipos de evento, diferenciais e galeria existem para levar a pessoa até o formulário.',
+        'O formulário virou o briefing do evento. São 15 campos, mas só nome, telefone e e-mail são obrigatórios. O resto (tipo de evento, data, horário, local, cidade, número e perfil dos convidados, serviço, extras, cardápio e restrições) é opcional e quase todo de clique. Quem preenche tudo entrega o orçamento pronto; quem tem pressa manda o mínimo e conversa depois.',
+        'O WhatsApp continuou, como botão fixo em todas as telas, para quem prefere falar direto. E o envio do formulário foi pelo Formspree, sem servidor próprio: para um negócio desse tamanho, um backend seria custo e manutenção sem ganho.'
+      ],
+      en: [
+        'One page, one goal: request a quote. The about section, how they work, event types, differentiators and gallery all exist to lead the visitor to the form.',
+        'The form became the event brief. It has 15 fields, but only name, phone and e-mail are required. The rest (event type, date, time, venue, city, guest count and profile, service, extras, menu and dietary restrictions) is optional and mostly click-based. Visitors who fill everything in hand over a ready-to-price quote; those in a hurry send the minimum and talk later.',
+        'WhatsApp stayed, as a floating button on every screen, for people who prefer to talk directly. Form submissions go through Formspree, with no server of our own: for a business this size, a backend would be cost and maintenance with no payoff.'
+      ]
+    },
+    execution: {
+      pt: [
+        'No primeiro dia saiu uma versão em HTML e CSS puro, para validar a estrutura e os textos com o cliente. Aprovada a direção, migrei para Next.js 16 com seções em componentes, animação de entrada leve e um header que muda ao rolar a página.',
+        'O formulário valida no navegador antes de enviar e, se der erro, a mensagem aponta o WhatsApp como saída, para nenhum pedido se perder.',
+        'Busca local desde o início: dados estruturados de LocalBusiness e FoodEstablishment com endereço, telefone, área atendida e catálogo de serviços, além de título e descrição pensados para busca, imagem de compartilhamento para quando o link circula no WhatsApp, sitemap e robots.'
+      ],
+      en: [
+        'On day one I shipped a plain HTML and CSS version to validate structure and copy with the client. Once the direction was approved, I migrated to Next.js 16 with componentized sections, light entrance animations and a header that changes on scroll.',
+        'The form validates in the browser before submitting and, if anything fails, the error message points to WhatsApp as a fallback, so no request gets lost.',
+        'Local search from the start: LocalBusiness and FoodEstablishment structured data with address, phone, service area and service catalog, plus search-oriented title and description, a share image for when the link circulates on WhatsApp, a sitemap and robots.'
+      ]
+    },
+    heroImage: {
+      src: '/images/project-alves-mansano.webp',
+      alt: 'Alves & Mansano Gastronomia — página inicial do site'
+    },
+    executionImages: [],
+    externalLink: 'https://www.amgastronomia.com.br/'
+  },
+  {
     slug: 'shop-my-feed',
     category: 'E-commerce / Product Design',
     company: 'Shop My Feed',

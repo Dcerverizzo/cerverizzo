@@ -38,7 +38,7 @@ const projects: Repo[] = [
     language: 'TypeScript',
     topics: ['nextjs', 'site-cliente', 'seo'],
     created_at: '2026-04-10T00:00:00Z',
-    homepage: null,
+    homepage: 'https://www.amgastronomia.com.br/',
     image: '/images/project-alves-mansano.webp',
     status: 'client'
   },
