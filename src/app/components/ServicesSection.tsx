@@ -2,6 +2,7 @@
 
 import { useTranslation } from '@/contexts/LanguageContext'
 import type { ReactNode } from 'react'
+import { CONTACT_EMAIL } from '@/content/contact'
 
 const serviceIcons: ReactNode[] = [
   <svg key="0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -26,7 +27,7 @@ export default function ServicesSection () {
   const services = t.services.items.map((item, i) => ({
     ...item,
     icon: serviceIcons[i],
-    link: '#contact'
+    link: `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`${t.contact.email_subject}: ${item.title}`)}`
   }))
 
   return (
@@ -96,6 +97,8 @@ interface ServiceItem {
   number: string
   title: string
   description: string
+  meta: string
+  price: string
   icon: ReactNode
   link: string
 }
@@ -162,6 +165,27 @@ function ServiceCard ({ service, cta }: { service: ServiceItem; cta: string }) {
       }}>
         {service.description}
       </p>
+
+      {/* Price and timeline */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <span style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'var(--text-base)',
+          fontWeight: 700,
+          color: 'var(--color-text-primary)'
+        }}>
+          {service.price}
+        </span>
+        <span style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-xs)',
+          letterSpacing: 'var(--tracking-widest)',
+          textTransform: 'uppercase',
+          color: 'var(--color-text-muted)'
+        }}>
+          {service.meta}
+        </span>
+      </div>
 
       {/* Footer link */}
       <a

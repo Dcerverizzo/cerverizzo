@@ -123,7 +123,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'shop-my-feed',
     category: 'E-commerce / Product Design',
     company: 'Shop My Feed',
-    period: '',
+    period: '2024',
     role: 'Design Engineer (Freelance)',
     stack: ['React', 'TypeScript', 'Figma', 'CSS3'],
     resultMetric: 'UX nativo',

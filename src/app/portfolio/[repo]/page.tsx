@@ -7,7 +7,7 @@ import { ArrowTopRightOnSquareIcon, ArrowLeftIcon } from '@heroicons/react/24/ou
 import React from 'react'
 
 type Params = {
-  params: { repo: string }
+  params: Promise<{ repo: string }>
 }
 
 const languageColors: Record<string, string> = {
@@ -33,7 +33,7 @@ export async function generateStaticParams () {
 }
 
 export default async function RepoPage ({ params }: Params) {
-  const name = params.repo
+  const { repo: name } = await params
   const repos = await fetchRepos()
   const repo = repos.find(r => r.name === name)
 

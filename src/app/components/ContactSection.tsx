@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslation } from '@/contexts/LanguageContext'
+import { CONTACT_EMAIL } from '@/content/contact'
 
 export default function ContactSection () {
   const { t } = useTranslation()
@@ -51,6 +52,17 @@ export default function ContactSection () {
           }}>
             {t.contact.heading_line2}
           </h2>
+          <p style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 'var(--text-base)',
+            fontWeight: 300,
+            color: 'var(--color-text-secondary)',
+            lineHeight: 'var(--leading-body)',
+            maxWidth: '480px',
+            margin: '24px 0 0'
+          }}>
+            {t.contact.subtitle}
+          </p>
         </div>
 
         {/* CTA Buttons */}
@@ -59,7 +71,7 @@ export default function ContactSection () {
           style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '80px' }}
         >
           <a
-            href="mailto:contact@cerverizzo.dev"
+            href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(t.contact.email_subject)}`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -119,7 +131,7 @@ export default function ContactSection () {
         >
           {/* Email */}
           <a
-            href="mailto:contact@cerverizzo.dev"
+            href={`mailto:${CONTACT_EMAIL}`}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -135,7 +147,7 @@ export default function ContactSection () {
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <polyline points="22,6 12,13 2,6" />
             </svg>
-            contact@cerverizzo.dev
+            {CONTACT_EMAIL}
           </a>
 
           {/* LinkedIn */}

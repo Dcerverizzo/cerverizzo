@@ -11,7 +11,7 @@ export const translations = {
     },
     hero: {
       available: '[ Disponível para projetos ]',
-      subtitle: 'Software Engineer Full Stack com mais de 10 anos construindo interfaces e produtos digitais de alto impacto.',
+      subtitle: 'Desenvolvedor Full Stack com mais de 8 anos de experiência, 6 deles numa fintech de pagamentos. Sites, sistemas e checkouts que convertem.',
       cta_primary: 'Ver Case Studies',
       cta_secondary: 'Entre em Contato',
       scroll: 'scroll'
@@ -19,40 +19,48 @@ export const translations = {
     about: {
       index: '01',
       heading: 'Sobre mim',
-      p1: 'Sou um Engenheiro de Software Full Stack com mais de 10 anos de experiência na construção de interfaces e aplicações web de alto desempenho.',
-      p2: 'Atualmente atuo como Software Development Engineer na Cobre Fácil, especializado na construção de componentes UX/UI com JavaScript, React, Next.js, TypeScript e Node.js. Também ofereço serviços de desenvolvimento de sites personalizados e consultoria de tecnologia online.',
+      p1: 'Sou Desenvolvedor Full Stack há mais de 8 anos. Os últimos 6 foram na Cobre Fácil, uma plataforma brasileira de cobrança e pagamentos (boleto, Pix, cartão, assinaturas e nota fiscal).',
+      p2: 'Lá eu trabalho do front ao back: checkout, área do cliente e design system em React e TypeScript, e integrações de pagamento e de nota fiscal no backend PHP. O redesign do checkout que fiz aumentou em 22% a conversão de pagamentos. Pela minha empresa, também atendo clientes como PJ, com nota fiscal: sites, sistemas sob medida e integrações de pagamento.',
       stats: [
-        { number: '10+', label: 'Anos de exp.' },
-        { number: '50+', label: 'Projetos' },
-        { number: '10+', label: 'Tecnologias' },
-        { number: '3', label: 'Países' }
+        { number: '8+', label: 'Anos como dev' },
+        { number: '6', label: 'Anos em fintech' },
+        { number: '+22%', label: 'Conversão no checkout' },
+        { number: 'PJ', label: 'Emito nota fiscal' }
       ]
     },
     services: {
       index: '02',
       heading: 'Serviços',
-      subtitle: 'Soluções digitais completas para negócios que querem se destacar online.',
-      cta: 'Saiba mais',
+      subtitle: 'Pacotes com escopo e prazo definidos. Atendo como PJ, com nota fiscal. Orçamento em até 24 h úteis.',
+      cta: 'Pedir orçamento',
       items: [
         {
           number: '01',
-          title: 'Desenvolvimento de Sites Personalizados',
-          description: 'Sites e aplicações web sob medida, com foco em performance, acessibilidade e experiência do usuário. Do design ao deploy.'
+          title: 'Landing page de vendas',
+          description: 'Uma página com texto e design, responsiva e rápida, integrada a Hotmart, WhatsApp ou formulário, com SEO básico.',
+          meta: '5 dias úteis',
+          price: 'A partir de R$ 1.500'
         },
         {
           number: '02',
-          title: 'Consultoria de Tecnologia Online',
-          description: 'Orientação estratégica para decisões tecnológicas, arquitetura de sistemas e escolha de stack. Sessões online para empresas e founders.'
+          title: 'Site institucional',
+          description: 'Até 5 páginas, com botão de WhatsApp, galeria, SEO local e perfil no Google Meu Negócio.',
+          meta: '10 dias úteis',
+          price: 'A partir de R$ 2.800'
         },
         {
           number: '03',
-          title: 'UI/UX Engineering',
-          description: 'Interfaces de alta fidelidade com animações e micro-interações. Implementação pixel-perfect a partir de designs Figma e referências visuais.'
+          title: 'Pagamento no seu site ou sistema',
+          description: 'Checkout com Pix, boleto e cartão, emissão de nota fiscal e confirmação automática de pagamento por webhook.',
+          meta: 'Prazo sob escopo',
+          price: 'A partir de R$ 2.000'
         },
         {
           number: '04',
-          title: 'Integração de APIs & Backend',
-          description: 'Desenvolvimento de APIs RESTful, integração com serviços externos e soluções backend escaláveis com Node.js, Python e bancos de dados modernos.'
+          title: 'Manutenção mensal',
+          description: 'Hospedagem, domínio, atualizações de segurança e até 2 h de ajustes por mês. Seu site sempre no ar.',
+          meta: 'Contínuo',
+          price: 'R$ 250/mês'
         }
       ]
     },
@@ -113,9 +121,19 @@ export const translations = {
           period: '2020 — Presente',
           current: true,
           bullets: [
-            'Desenvolvimento de componentes UX/UI com React, Next.js e TypeScript',
-            'Construção e manutenção de APIs RESTful com Node.js',
-            'Otimização de performance e acessibilidade em aplicações de grande escala'
+            'Redesign do checkout de pagamento: +22% de conversão, medido em produção',
+            'Biblioteca de componentes React do design system: ~40% menos tempo pra entregar telas novas',
+            'Integrações de pagamento (Zoop, Celcoin) e de NFS-e (PlugNotas) no backend PHP (Yii)'
+          ]
+        },
+        {
+          role: 'Design Engineer (freela)',
+          company: 'Shop My Feed',
+          period: '2024',
+          current: false,
+          bullets: [
+            'Interface completa de social commerce de moda em React, do Figma ao produto',
+            'Linguagem visual espelhada no Instagram, de onde vinha o público, pra reduzir o atrito na entrada'
           ]
         },
         {
@@ -125,19 +143,18 @@ export const translations = {
           current: false,
           bullets: [
             'Redesign mobile-first da plataforma de webinars, com queda de 45% nos casos de abandono',
-            'Sites e sistemas sob medida como freelancer, para clientes nacionais e internacionais',
+            'Biblioteca de componentes compartilhada por 3 produtos: ~50% menos código duplicado',
             'Palestrante em eventos de tecnologia (SistemasBR, Didática Tech)'
           ]
         },
         {
-          role: 'Desenvolvedor Web',
-          company: 'Agências & CLT',
+          role: 'Analista de Suporte (estágio → sênior)',
+          company: 'Sistemas BR',
           period: '2016 — 2018',
           current: false,
           bullets: [
-            'Desenvolvimento Frontend com HTML, CSS, JavaScript e PHP',
-            'Criação de e-commerces e landing pages de alta conversão',
-            'Suporte técnico e manutenção de sistemas legados'
+            'Implantou Scrum no time de suporte (8 pessoas): backlog de ~120 pra ~40 chamados em 2 meses',
+            'Soluções pós-venda sob medida pra clientes corporativos: ~20% menos churn no primeiro ano'
           ]
         }
       ]
@@ -152,7 +169,9 @@ export const translations = {
       index: '07',
       heading_line1: 'Vamos construir algo',
       heading_line2: 'extraordinário.',
-      cta_email: 'Enviar mensagem',
+      subtitle: 'Me conte o que você precisa. Respondo com um orçamento em até 24 h úteis.',
+      email_subject: 'Orçamento de projeto',
+      cta_email: 'Pedir orçamento',
       cta_linkedin: 'LinkedIn →'
     },
     work: {
@@ -184,7 +203,7 @@ export const translations = {
       cta_button: 'Entrar em contato'
     },
     footer: {
-      tagline: 'Software Engineer Full Stack. Sites personalizados e consultoria de tecnologia online.',
+      tagline: 'Desenvolvedor Full Stack. Sites, sistemas e integrações de pagamento, com nota fiscal.',
       nav_label: 'Navegação',
       social_label: 'Redes',
       made_with: 'Feito com Next.js & Tailwind CSS',
@@ -202,7 +221,7 @@ export const translations = {
     },
     hero: {
       available: '[ Available for projects ]',
-      subtitle: 'Full Stack Software Engineer with 10+ years building high-impact interfaces and digital products.',
+      subtitle: 'Full Stack Developer with 8+ years of experience, the last 6 at a payments fintech. Websites, systems and checkouts that convert.',
       cta_primary: 'View Case Studies',
       cta_secondary: 'Get in Touch',
       scroll: 'scroll'
@@ -210,40 +229,48 @@ export const translations = {
     about: {
       index: '01',
       heading: 'About me',
-      p1: 'I am a Full Stack Software Engineer with over 10 years of experience building high-performance interfaces and web applications.',
-      p2: 'I currently work as a Software Development Engineer at Cobre Fácil, specializing in UX/UI components with JavaScript, React, Next.js, TypeScript, and Node.js. I also offer custom website development and online technology consulting.',
+      p1: 'I have been a Full Stack Developer for 8+ years. The last 6 were at Cobre Fácil, a Brazilian billing and payments platform (bank slips, Pix, cards, subscriptions and invoicing).',
+      p2: 'I work across the stack there: checkout, client area and the design system in React and TypeScript, plus payment and invoicing integrations on the PHP backend. My checkout redesign raised payment conversion by 22%. Through my own company I also take client projects: websites, custom systems and payment integrations.',
       stats: [
-        { number: '10+', label: 'Years of exp.' },
-        { number: '50+', label: 'Projects' },
-        { number: '10+', label: 'Technologies' },
-        { number: '3', label: 'Countries' }
+        { number: '8+', label: 'Years as a dev' },
+        { number: '6', label: 'Years in fintech' },
+        { number: '+22%', label: 'Checkout conversion' },
+        { number: 'B2B', label: 'Invoiced projects' }
       ]
     },
     services: {
       index: '02',
       heading: 'Services',
-      subtitle: 'Complete digital solutions for businesses that want to stand out online.',
-      cta: 'Learn more',
+      subtitle: 'Packages with defined scope and timeline, invoiced through my company. Quotes within one business day.',
+      cta: 'Request a quote',
       items: [
         {
           number: '01',
-          title: 'Custom Website Development',
-          description: 'Tailor-made websites and web applications focused on performance, accessibility, and user experience. From design to deployment.'
+          title: 'Sales landing page',
+          description: 'One page with copy and design, responsive and fast, connected to your checkout, WhatsApp or a form, with basic SEO.',
+          meta: '5 business days',
+          price: 'From R$ 1,500'
         },
         {
           number: '02',
-          title: 'Online Technology Consulting',
-          description: 'Strategic guidance for technology decisions, system architecture, and stack selection. Online sessions for companies and founders.'
+          title: 'Company website',
+          description: 'Up to 5 pages, with WhatsApp button, gallery, local SEO and Google Business Profile.',
+          meta: '10 business days',
+          price: 'From R$ 2,800'
         },
         {
           number: '03',
-          title: 'UI/UX Engineering',
-          description: 'High-fidelity interfaces with animations and micro-interactions. Pixel-perfect implementation from Figma designs and visual references.'
+          title: 'Payments in your site or system',
+          description: 'Checkout with Pix, bank slips and cards, invoice issuance and automatic payment confirmation via webhook.',
+          meta: 'Timeline by scope',
+          price: 'From R$ 2,000'
         },
         {
           number: '04',
-          title: 'API & Backend Integration',
-          description: 'RESTful API development, integration with external services, and scalable backend solutions with Node.js, Python, and modern databases.'
+          title: 'Monthly maintenance',
+          description: 'Hosting, domain, security updates and up to 2 hours of changes per month. Your site always online.',
+          meta: 'Ongoing',
+          price: 'R$ 250/month'
         }
       ]
     },
@@ -304,9 +331,19 @@ export const translations = {
           period: '2020 — Present',
           current: true,
           bullets: [
-            'UX/UI component development with React, Next.js, and TypeScript',
-            'Building and maintaining RESTful APIs with Node.js',
-            'Performance and accessibility optimization in large-scale applications'
+            'Payment checkout redesign: +22% conversion, measured in production',
+            'React component library for the design system: ~40% less time to ship new screens',
+            'Payment (Zoop, Celcoin) and service-invoice (PlugNotas) integrations on the PHP (Yii) backend'
+          ]
+        },
+        {
+          role: 'Design Engineer (freelance)',
+          company: 'Shop My Feed',
+          period: '2024',
+          current: false,
+          bullets: [
+            'Full fashion social-commerce UI in React, from Figma to product',
+            "Mirrored Instagram's visual language, where users came from, to reduce friction at entry"
           ]
         },
         {
@@ -316,19 +353,18 @@ export const translations = {
           current: false,
           bullets: [
             'Mobile-first redesign of the webinar platform, cutting abandonment cases by 45%',
-            'Custom websites and systems as a freelancer, for national and international clients',
+            'Shared component library used by 3 products: ~50% less duplicated code',
             'Speaker at technology events (SistemasBR, Didática Tech)'
           ]
         },
         {
-          role: 'Web Developer',
-          company: 'Agencies & CLT',
+          role: 'Support Analyst (intern → senior)',
+          company: 'Sistemas BR',
           period: '2016 — 2018',
           current: false,
           bullets: [
-            'Frontend development with HTML, CSS, JavaScript, and PHP',
-            'E-commerce and high-conversion landing page creation',
-            'Technical support and legacy system maintenance'
+            'Introduced Scrum to an 8-person support team: backlog from ~120 to ~40 tickets in 2 months',
+            'Custom post-sale solutions for corporate clients: ~20% lower churn in the first year'
           ]
         }
       ]
@@ -343,7 +379,9 @@ export const translations = {
       index: '07',
       heading_line1: "Let's build something",
       heading_line2: 'extraordinary.',
-      cta_email: 'Send message',
+      subtitle: 'Tell me what you need. I reply with a quote within one business day.',
+      email_subject: 'Project quote',
+      cta_email: 'Request a quote',
       cta_linkedin: 'LinkedIn →'
     },
     work: {
@@ -375,7 +413,7 @@ export const translations = {
       cta_button: 'Get in touch'
     },
     footer: {
-      tagline: 'Full Stack Software Engineer. Custom websites and online technology consulting.',
+      tagline: 'Full Stack Developer. Websites, custom systems and payment integrations.',
       nav_label: 'Navigation',
       social_label: 'Social',
       made_with: 'Built with Next.js & Tailwind CSS',

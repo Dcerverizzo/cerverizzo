@@ -10,9 +10,10 @@ import Link from 'next/link'
 export async function generateMetadata ({
   params
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<{ title: string, description: string, metadataBase: URL }> {
-  const { title, description } = await fetchPost(params.slug)
+  const { slug } = await params
+  const { title, description } = await fetchPost(slug)
 
   return {
     title,
@@ -21,8 +22,9 @@ export async function generateMetadata ({
   }
 }
 
-export default async function Page ({ params }: { params: { slug: string } }): Promise<JSX.Element> {
-  const post = await fetchPost(params.slug)
+export default async function Page ({ params }: { params: Promise<{ slug: string }> }): Promise<React.JSX.Element> {
+  const { slug } = await params
+  const post = await fetchPost(slug)
   const {
     body_markdown: bodyMarkdown,
     cover_image: coverImage,

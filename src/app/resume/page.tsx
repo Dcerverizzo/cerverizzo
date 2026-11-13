@@ -8,16 +8,16 @@ export const metadata: Metadata = {
   description: 'Resume and professional experience of Daniel Cerverizzo'
 }
 
-const DRIVE_PDF_URL = process.env.NEXT_PUBLIC_RESUME_URL ?? 'https://drive.google.com/file/d/1CNJNoILKdnWzMjIb6hsmstEqM7CzYHQR/view?usp=sharing'
+const DRIVE_PDF_URL = process.env.NEXT_PUBLIC_RESUME_URL ?? '/curriculo-daniel-cerverizzo.pdf'
 const DRIVE_EMBED_URL = DRIVE_PDF_URL.replace('/view?usp=sharing', '/preview')
 
 const skills = [
-  { category: 'Languages', items: ['TypeScript', 'JavaScript', 'Python', 'PHP', 'Ruby', 'SQL'] },
-  { category: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS', 'HTML/CSS'] },
-  { category: 'Backend', items: ['Node.js', 'Express', 'Rails', 'Laravel'] },
-  { category: 'Database', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'] },
-  { category: 'DevOps', items: ['Docker', 'AWS', 'CI/CD', 'Linux'] },
-  { category: 'Tools', items: ['Git', 'VS Code', 'Figma', 'Jira'] }
+  { category: 'Languages', items: ['TypeScript', 'JavaScript', 'PHP', 'SQL', 'Ruby'] },
+  { category: 'Frontend', items: ['React', 'Next.js', 'Vue.js', 'Tailwind CSS', 'HTML/CSS'] },
+  { category: 'Backend', items: ['PHP (Yii, Slim)', 'Node.js', 'tRPC', 'Rails'] },
+  { category: 'Database', items: ['MySQL', 'PostgreSQL', 'Drizzle ORM'] },
+  { category: 'Payments', items: ['Pix', 'Boleto', 'Zoop', 'Celcoin', 'NFS-e'] },
+  { category: 'Tools', items: ['Docker', 'GitLab CI', 'Vercel', 'Figma', 'Anthropic SDK'] }
 ]
 
 const experience = [
@@ -25,7 +25,13 @@ const experience = [
     role: 'Software Development Engineer',
     company: 'Cobre Fácil',
     period: '2020 — Presente',
-    description: 'Componentes de UX/UI com React, Next.js e TypeScript, APIs com Node.js e o redesign do checkout que aumentou em 22% a conversão de pagamentos.'
+    description: 'Checkout, área do cliente e design system em React e TypeScript, integrações de pagamento e NFS-e no backend PHP (Yii) e o redesign do checkout que aumentou em 22% a conversão de pagamentos.'
+  },
+  {
+    role: 'Design Engineer (freela)',
+    company: 'Shop My Feed',
+    period: '2024',
+    description: 'Interface completa de social commerce de moda em React, do Figma ao produto.'
   },
   {
     role: 'Front End Engineer',
@@ -34,10 +40,10 @@ const experience = [
     description: 'Redesign mobile-first da plataforma de webinars, com queda de 45% nos casos de abandono e problemas de acesso pelo celular.'
   },
   {
-    role: 'Desenvolvedor Web',
-    company: 'Agências & CLT',
+    role: 'Analista de Suporte (estágio → sênior)',
+    company: 'Sistemas BR',
     period: '2016 — 2018',
-    description: 'Front-end com HTML, CSS, JavaScript e PHP, e-commerces e landing pages de alta conversão.'
+    description: 'Implantou Scrum no time de suporte (8 pessoas), reduzindo o backlog de ~120 pra ~40 chamados em 2 meses.'
   }
 ]
 
@@ -78,7 +84,7 @@ export default function ResumePage () {
               maxWidth: '540px',
               lineHeight: 'var(--leading-body)'
             }}>
-              Software Engineer Full Stack com mais de 10 anos de experiência.
+              Desenvolvedor Full Stack com mais de 8 anos de experiência, 6 deles em pagamentos.
             </p>
           </header>
 

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { fetchPosts } from '../../lib/devto/fetch'
 import { ChatBubbleLeftIcon, ClockIcon } from '@heroicons/react/24/outline'
 
-const RecentPosts = async ({ limit, grid }: { limit?: number, grid?: boolean }): Promise<JSX.Element> => {
+const RecentPosts = async ({ limit, grid }: { limit?: number, grid?: boolean }): Promise<React.JSX.Element> => {
   const recentPosts = await fetchPosts()
   const postsToDisplay = (typeof limit === 'number' && !isNaN(limit)) ? recentPosts.slice(0, limit) : recentPosts
 

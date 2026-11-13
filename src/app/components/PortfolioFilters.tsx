@@ -203,7 +203,7 @@ interface ProjectCardProps {
   featured?: boolean
 }
 
-function ProjectCard ({ repo, featured = false }: ProjectCardProps): JSX.Element {
+function ProjectCard ({ repo, featured = false }: ProjectCardProps): React.JSX.Element {
   const { t, lang } = useTranslation()
   const year = repo.created_at != null ? new Date(repo.created_at).getFullYear() : null
   const detailHref = repo.caseStudy != null

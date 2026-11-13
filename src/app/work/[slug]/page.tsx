@@ -4,7 +4,7 @@ import CaseStudyContent from './CaseStudyContent'
 import type { Metadata } from 'next'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export function generateStaticParams () {
@@ -12,7 +12,8 @@ export function generateStaticParams () {
 }
 
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
-  const cs = caseStudies.find((c) => c.slug === params.slug)
+  const { slug } = await params
+  const cs = caseStudies.find((c) => c.slug === slug)
   if (cs == null) return {}
   return {
     title: `${cs.title} | Work | Daniel Cerverizzo`,
@@ -21,8 +22,9 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function CaseStudyPage ({ params }: Props) {
-  const cs = caseStudies.find((c) => c.slug === params.slug)
+export default async function CaseStudyPage ({ params }: Props) {
+  const { slug } = await params
+  const cs = caseStudies.find((c) => c.slug === slug)
   if (cs == null) notFound()
 
   const idx = caseStudies.indexOf(cs)

@@ -9,15 +9,15 @@ const stackGroups = [
   },
   {
     key: 'backend' as const,
-    items: ['Node.js', 'Python', 'PHP', 'Ruby on Rails', 'Express', 'Laravel']
+    items: ['PHP (Yii, Slim)', 'Node.js', 'tRPC', 'REST APIs', 'Ruby on Rails']
   },
   {
     key: 'database' as const,
-    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis']
+    items: ['MySQL', 'PostgreSQL', 'Drizzle ORM']
   },
   {
     key: 'devops' as const,
-    items: ['Docker', 'AWS', 'Git', 'CI/CD', 'Linux', 'Figma']
+    items: ['Docker', 'GitLab CI', 'GitHub Actions', 'Vercel', 'Linux', 'Figma']
   }
 ]
 
